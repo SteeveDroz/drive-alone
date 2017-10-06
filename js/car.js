@@ -12,6 +12,7 @@ const createCar = function() {
         speed: Math.random() * 0.2 + 0.9,
         steer: Math.random() * 0.05 - 0.025,
         fitness: 0,
+        color: '#440',
         working: true,
         move: function() {
             if (this.working) {
@@ -22,7 +23,7 @@ const createCar = function() {
             }
         },
         draw: function(context) {
-            context.fillStyle = '#440'
+            context.fillStyle = this.color
             context.strokeStyle = '#222'
             context.save()
             context.translate(this.x, this.y)
@@ -30,6 +31,21 @@ const createCar = function() {
             context.fillRect(-this.width / 2, -this.height / 2, this.width, this.height)
             context.strokeRect(-this.width / 2, -this.height / 2, this.width, this.height)
             context.restore()
+        },
+        focus: function(context, width, height) {
+
         }
     }
+}
+
+const getBest = function(cars) {
+    return cars.reduce((a, b) => {
+        if (!a.working) {
+            return b
+        }
+        if (!b.working) {
+            return a
+        }
+        return a.fitness > b.fitness ? a : b
+    }, cars[0])
 }

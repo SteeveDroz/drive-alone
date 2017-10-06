@@ -27,11 +27,28 @@ const update = function(data) {
 }
 
 const draw = function(data, world, width, height) {
-    world.fillStyle = '#eee'
-    world.fillRect(0, 0, width, height)
     const {
         cars
     } = data
 
+    world.fillStyle = '#eee'
+    world.fillRect(0, 0, width, height)
+
+    world.save()
+    const best = getBest(cars)
+    world.translate(width / 2 - best.x, height / 2 - best.y)
+
+    world.beginPath()
+    for (let i = -1000; i < 1000; i += 50) {
+        world.moveTo(i, -1000)
+        world.lineTo(i, 1000)
+        world.moveTo(-1000, i)
+        world.lineTo(1000, i)
+    }
+    world.strokeStyle = '#ccc'
+    world.stroke()
+
     cars.forEach(car => car.draw(world))
+
+    world.restore()
 }
