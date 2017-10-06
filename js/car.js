@@ -6,8 +6,8 @@ const createCar = function() {
     return {
         x: 0,
         y: 0,
-        width: 30,
-        height: 50,
+        width: 50,
+        height: 30,
         angle: Math.random() * 2 * Math.PI,
         speed: Math.random() * 0.2 + 0.9,
         steer: Math.random() * 0.05 - 0.025,
@@ -17,8 +17,8 @@ const createCar = function() {
         move: function() {
             if (this.working) {
                 this.angle += this.steer
-                this.x += Math.sin(this.angle) * this.speed
-                this.y += Math.cos(this.angle) * this.speed
+                this.x += Math.cos(this.angle) * this.speed
+                this.y -= Math.sin(this.angle) * this.speed
                 this.fitness += this.speed
             }
         },
@@ -32,9 +32,30 @@ const createCar = function() {
             context.strokeRect(-this.width / 2, -this.height / 2, this.width, this.height)
             context.restore()
         },
-        focus: function(context, width, height) {
+        getCorners: function() {
+            const corners = []
+            const distance = Math.sqrt(this.width * this.width + this.height * this.height) / 2
+            const angle = Math.atan(this.height / this.width)
+            corners.push({
+                x: this.x + Math.cos(angle + this.angle) * distance,
+                y: this.y - Math.sin(angle + this.angle) * distance
+            }, {
+                x: this.x + Math.cos(-angle + this.angle) * distance,
+                y: this.y - Math.sin(-angle + this.angle) * distance
+            }, {
+                x: this.x + Math.cos(Math.PI + angle + this.angle) * distance,
+                y: this.y - Math.sin(Math.PI + angle + this.angle) * distance
+            }, {
+                x: this.x + Math.cos(Math.PI - angle + this.angle) * distance,
+                y: this.y - Math.sin(Math.PI - angle + this.angle) * distance
+            })
 
-        }
+            return corners
+        },
+        getSegments: function() {
+            const corners = getCorners()
+        },
+        collideWith: function(path) {}
     }
 }
 

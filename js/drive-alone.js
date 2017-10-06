@@ -50,9 +50,9 @@ const draw = function(data, world, width, height) {
 
     cars.forEach(car => car.draw(world))
 
-    drawPath(world, [{
-        x: 0,
-        y: 0
+    const path = createPath([{
+        x: -100,
+        y: 50
     }, {
         x: 100,
         y: 300
@@ -60,6 +60,7 @@ const draw = function(data, world, width, height) {
         x: 200,
         y: 400
     }])
+    path.draw(world)
 
     world.restore()
 }
