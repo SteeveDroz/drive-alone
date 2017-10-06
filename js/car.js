@@ -4,8 +4,8 @@ console.log('LOAD — car.js')
 
 const createCar = function() {
     return {
-        x: 150,
-        y: 150,
+        x: 0,
+        y: 0,
         width: 30,
         height: 50,
         angle: Math.random() * 2 * Math.PI,
