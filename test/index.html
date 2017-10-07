@@ -7,15 +7,17 @@
     <script src="../js/Point.js"></script>
     <script src="test.js"></script>
     <script src="TestPoint.js"></script>
+    <script src="TestSegment.js"></script>
     <script>
-        const test = function() {
-            runUnitTests([TestPoint])
-        }
+        const test = new UnitTest([
+            TestPoint,
+            TestSegment
+        ])
 
     </script>
 </head>
 
-<body onload="test()">
+<body onload="test.run()">
     <h1>Unit tests</h1>
     <table>
         <thead>
