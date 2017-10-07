@@ -8,7 +8,6 @@ const runUnitTests = function(tests = []) {
         results.innerHTML += `<tr><th colspan="2">${testClass.name||'Please provide a class name'}</th></tr>`
         Object.getOwnPropertyNames(testClass.prototype).forEach(function(property) {
             if (property != 'constructor' && testObject[property] instanceof Function) {
-                console.log(property);
                 try {
                     testObject[property]()
                     results.innerHTML += `<tr><td>${property}()</td><td style="background:green;color:white">OK</td></tr>`
@@ -52,11 +51,11 @@ const assertEqual = function(expected, value, limit = 0) {
                 break
 
             case 'object':
-                for (let property in expected) {
+                Object.getOwnPropertyNames(expected).forEach(function(property) {
+                    if (typeof expected[property] === 'function') return
                     if (!value.hasOwnProperty(property)) throw Error
-                    //TODO handle functions
                     assertEqual(expected[property], value[property], limit)
-                }
+                })
                 break
 
             case 'number':
@@ -67,7 +66,6 @@ const assertEqual = function(expected, value, limit = 0) {
                 if (expected !== value) throw Error
         }
     } catch (e) {
-        console.log(new Error().stack);
         throw AssertError(expected, value)
     }
 }
