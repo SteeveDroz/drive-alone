@@ -7,11 +7,19 @@ const load = function() {
     canvas.width = 300
     canvas.height = 300
     const world = canvas.getContext('2d')
+
     const data = {}
+
     data.cars = []
     for (let i = 0; i < 10; i++) {
-        data.cars.push(createCar())
+        data.cars.push(Car())
     }
+
+    data.path = Path([
+        [-100, 50],
+        [100, 300],
+        [200, 400]
+    ])
 
     setInterval(function() {
         update(data)
@@ -28,7 +36,8 @@ const update = function(data) {
 
 const draw = function(data, world, width, height) {
     const {
-        cars
+        cars,
+        path
     } = data
 
     world.fillStyle = '#eee'
@@ -36,7 +45,7 @@ const draw = function(data, world, width, height) {
 
     world.save()
     const best = getBest(cars)
-    world.translate(width / 2 - best.x, height / 2 - best.y)
+    world.translate(width / 2 - best.location.x, height / 2 - best.location.y)
 
     world.beginPath()
     for (let i = -1000; i < 1000; i += 50) {
@@ -49,17 +58,6 @@ const draw = function(data, world, width, height) {
     world.stroke()
 
     cars.forEach(car => car.draw(world))
-
-    const path = createPath([{
-        x: -100,
-        y: 50
-    }, {
-        x: 100,
-        y: 300
-    }, {
-        x: 200,
-        y: 400
-    }])
     path.draw(world)
 
     world.restore()

@@ -2,9 +2,13 @@
 
 console.log('LOAD — path.js')
 
-const createPath = function(points = null) {
+const Path = function(points = null) {
+    const listOfPoints = []
+    points.forEach(function(point) {
+        listOfPoints.push(Point(...point))
+    })
     return {
-        points: points,
+        points: listOfPoints,
         draw: function(context) {
             context.beginPath()
             context.moveTo(this.points[0].x, this.points[0].y)
@@ -17,7 +21,7 @@ const createPath = function(points = null) {
         getSegments: function() {
             const segments = []
             for (let i = 1; i < this.points.length; i++) {
-                segments.push(createSegment(this.points[i - 1], this.points[i]))
+                segments.push(Segment(this.points[i - 1], this.points[i]))
             }
             return segments
         }
