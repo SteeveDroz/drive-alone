@@ -49,8 +49,31 @@ class TestPoint {
         assertEqual(Point(4, 5), point)
     }
 
-    testRotate() {
+    testRotateNoArgument() {
         const point = Point(1, 0)
+        assertEqual(Point(Math.sqrt(3) / 2, 1 / 2), point.rotate(Math.PI / 6), 1e-6)
+        assertEqual(Point(Math.sqrt(2) / 2, Math.sqrt(2) / 2), point.rotate(Math.PI / 4), 1e-6)
+        assertEqual(Point(1 / 2, Math.sqrt(3) / 2), point.rotate(Math.PI / 3), 1e-6)
         assertEqual(Point(0, 1), point.rotate(Math.PI / 2), 1e-6)
+        assertEqual(Point(-1, 0), point.rotate(Math.PI), 1e-6)
+        assertEqual(Point(1, 0), point.rotate(2 * Math.PI), 1e-6)
+    }
+
+    testRotate() {
+        const point = Point(4, 5)
+        const center = Point(3, 5)
+        assertEqual(Point(3 + Math.sqrt(3) / 2, 5 + 1 / 2), point.rotate(Math.PI / 6, center), 1e-6)
+        assertEqual(Point(3 + Math.sqrt(2) / 2, 5 + Math.sqrt(2) / 2), point.rotate(Math.PI / 4, center), 1e-6)
+        assertEqual(Point(3 + 1 / 2, 5 + Math.sqrt(3) / 2), point.rotate(Math.PI / 3, center), 1e-6)
+        assertEqual(Point(3, 6), point.rotate(Math.PI / 2, center), 1e-6)
+        assertEqual(Point(2, 5), point.rotate(Math.PI, center), 1e-6)
+        assertEqual(Point(4, 5), point.rotate(2 * Math.PI, center), 1e-6)
+
+    }
+
+    testRotateNotModify() {
+        const point = Point(4, 5)
+        point.rotate(1)
+        assertEqual(Point(4, 5), point)
     }
 }
