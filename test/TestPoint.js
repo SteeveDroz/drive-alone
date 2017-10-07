@@ -76,4 +76,53 @@ class TestPoint {
         point.rotate(1)
         assertEqual(Point(4, 5), point)
     }
+
+    testMeasureAngleNoArgument() {
+        const point1 = Point(1, 0)
+        assertEqual(0, point1.measureAngle(), 1e-6)
+
+        const point2 = Point(Math.sqrt(3), 1)
+        assertEqual(Math.PI / 6, point2.measureAngle(), 1e-6)
+
+        const point3 = Point(1, 1)
+        assertEqual(Math.PI / 4, point3.measureAngle(), 1e-6)
+
+        const point4 = Point(1, Math.sqrt(3))
+        assertEqual(Math.PI / 3, point4.measureAngle(), 1e-6)
+
+        const point5 = Point(0, 1)
+        assertEqual(Math.PI / 2, point5.measureAngle(), 1e-6)
+
+        const point6 = Point(-1, 0)
+        assertEqual(Math.PI, point6.measureAngle(), 1e-6)
+    }
+
+    testMeasureAngle() {
+        const center = Point(4, 5)
+        const point1 = Point(5, 5)
+        assertEqual(0, point1.measureAngle(center), 1e-6)
+
+        const point2 = Point(4 + Math.sqrt(3), 6)
+        assertEqual(Math.PI / 6, point2.measureAngle(center), 1e-6)
+
+        const point3 = Point(5, 6)
+        assertEqual(Math.PI / 4, point3.measureAngle(center), 1e-6)
+
+        const point4 = Point(5, 5 + Math.sqrt(3))
+        assertEqual(Math.PI / 3, point4.measureAngle(center), 1e-6)
+
+        const point5 = Point(4, 6)
+        assertEqual(Math.PI / 2, point5.measureAngle(center), 1e-6)
+
+        const point6 = Point(3, 5)
+        assertEqual(Math.PI, point6.measureAngle(center), 1e-6)
+    }
+
+    testMeasureAngleSamePoint() {
+        const origin = Point(0, 0)
+        assertEqual(0, origin.measureAngle(), 1e-6)
+
+        const point = Point(4, 5)
+        assertEqual(0, point.measureAngle(point), 1e-6)
+    }
 }
