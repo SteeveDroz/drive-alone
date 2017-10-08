@@ -19,7 +19,7 @@ class Car {
         if (this.working) {
             this.angle += this.steer
             this.location.x += Math.cos(this.angle) * this.speed
-            this.location.y -= Math.sin(this.angle) * this.speed
+            this.location.y += Math.sin(this.angle) * this.speed
             this.fitness += this.speed
         }
     }
@@ -27,9 +27,10 @@ class Car {
     draw(context) {
         context.fillStyle = this.color
         context.strokeStyle = '#222'
+        context.lineWidth = 2
         context.save()
         context.translate(this.location.x, this.location.y)
-        context.rotate(-this.angle)
+        context.rotate(this.angle)
         context.fillRect(-this.width / 2, -this.height / 2, this.width, this.height)
         context.strokeRect(-this.width / 2, -this.height / 2, this.width, this.height)
         context.restore()
@@ -39,10 +40,14 @@ class Car {
         const corners = []
         const distance = Math.sqrt(this.width * this.width + this.height * this.height) / 2
         const angle = Math.atan(this.height / this.width)
-        corners.push(Point(this.location.x + Math.cos(angle + this.angle) * distance, this.location.y - Math.sin(angle + this.angle) * distance))
-        corners.push(Point(this.location.x + Math.cos(-angle + this.angle) * distance, this.location.y - Math.sin(-angle + this.angle) * distance))
-        corners.push(Point(this.location.x + Math.cos(Math.PI + angle + this.angle) * distance, this.location.y - Math.sin(Math.PI + angle + this.angle) * distance))
-        corners.push(Point(this.location.x + Math.cos(Math.PI - angle + this.angle) * distance, this.location.y - Math.sin(Math.PI - angle + this.angle) * distance))
+
+        corners.push(new Point(this.location.x + Math.cos(angle + this.angle) * distance, this.location.y - Math.sin(angle + this.angle) * distance))
+
+        corners.push(new Point(this.location.x + Math.cos(-angle + this.angle) * distance, this.location.y - Math.sin(-angle + this.angle) * distance))
+
+        corners.push(new Point(this.location.x + Math.cos(Math.PI + angle + this.angle) * distance, this.location.y - Math.sin(Math.PI + angle + this.angle) * distance))
+
+        corners.push(new Point(this.location.x + Math.cos(Math.PI - angle + this.angle) * distance, this.location.y - Math.sin(Math.PI - angle + this.angle) * distance))
 
         return corners
     }
@@ -50,10 +55,11 @@ class Car {
     getSegments() {
         const segments = []
 
-        const corners = getCorners()
+        const corners = this.getCorners()
         for (let i = 1; i < corners.length; i++) {
-            segments.push(Segment(corners[i - 1], corners[i]))
+            segments.push(new Segment(corners[i - 1], corners[i]))
         }
+        segments.push(new Segment(corners[corners.length - 1], corners[0]))
         return segments
     }
 
