@@ -1,3 +1,5 @@
+"use strict";
+
 class TestSegment {
     testConstructorTwoArguments() {
         const segment = new Segment(new Point(0, 0), new Point(1, 1))
