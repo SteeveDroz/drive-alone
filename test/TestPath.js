@@ -6,7 +6,7 @@ class TestPath {
             [0, 0],
             [1, 1]
         ])
-        UnitTest.assertDefined(path)
+        UnitTest.assertTrue(path instanceof Path)
         UnitTest.assertEqual([new Point(0, 0), new Point(1, 1)], path.points)
     }
 

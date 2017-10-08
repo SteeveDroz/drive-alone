@@ -4,16 +4,14 @@ class TestPoint {
 
     testConstructorOrigin() {
         const origin = new Point(0, 0)
-        UnitTest.assertDefined(origin.x)
-        UnitTest.assertDefined(origin.y)
+        UnitTest.assertTrue(origin instanceof Point)
         UnitTest.assertEqual(0, origin.x)
         UnitTest.assertEqual(0, origin.y)
     }
 
     testConstructor() {
         const point = new Point(4, 5)
-        UnitTest.assertDefined(point.x)
-        UnitTest.assertDefined(point.y)
+        UnitTest.assertTrue(point instanceof Point)
         UnitTest.assertEqual(4, point.x)
         UnitTest.assertEqual(5, point.y)
         UnitTest.assertEqual(new Point(4, 5), point)
