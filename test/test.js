@@ -26,7 +26,7 @@ class UnitTest {
                     UnitTest.total = 0
                     try {
                         testObject[property]()
-                        results.innerHTML += `<tr><td>${property}()</td><td style="background:green;color:white">OK (${UnitTest.total} assertion(s))</td></tr>`
+                        results.innerHTML += `<tr><td>${property}()</td><td style="background:green;color:white">OK (${UnitTest.total} assertion${UnitTest.total==1?'':'s'})</td></tr>`
                     } catch (e) {
                         if (e.name == 'AssertError') {
                             results.innerHTML += `<tr><td>${property}()</td><td style="background:red;color:white">${e.message}</td></tr>`
