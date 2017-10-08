@@ -58,9 +58,17 @@ class UnitTest {
         return error
     }
 
+    static success() {
+        UnitTest.total += 1
+    }
+    static fail() {
+        UnitTest.total += 1
+        throw UnitTest.AssertError('fail', 'fail')
+    }
+
     static assertDefined(value) {
         UnitTest.total += 1
-        if (value === undefined) throw this.AssertError('defined', value)
+        if (value === undefined) throw UnitTest.AssertError('defined', value)
     }
 
     static assertUndefined(value) {
@@ -104,7 +112,7 @@ class UnitTest {
             }
         } catch (e) {
             console.log((new Error).stack)
-            throw this.AssertError(expected, value)
+            throw UnitTest.AssertError(expected, value)
         }
     }
 }

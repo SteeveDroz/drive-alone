@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <title>Unit tests</title>
+    <script src="../js/Path.js"></script>
     <script src="../js/Point.js"></script>
     <script src="../js/Segment.js"></script>
     <script src="UnitTest.js"></script>
@@ -30,7 +31,7 @@
                         results += `<td style="background:green;color:white">OK (${propertyResult.assertions} assertion${propertyResult.assertions==1?'':'s'})</td>`
                     } else {
                         if (propertyResult.assertions > 0) {
-                            results += `<td style="background:red;color:white">${propertyResult.message}</td>`
+                            results += `<td style="background:red;color:white">Failed assertion ${propertyResult.assertions}:<br>${propertyResult.message}</td>`
                         } else {
                             results += `<td style="background:darkslategray;color:white">${propertyResult.message}</td>`
                         }

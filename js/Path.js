@@ -6,10 +6,15 @@ class Path {
     constructor(points) {
         const listOfPoints = []
         points.forEach(function(point) {
+            if (point.length != 2) throw Error()
+            point.forEach(function(coordinate) {
+                if (typeof coordinate !== 'number') throw Error()
+            })
             listOfPoints.push(new Point(...point))
         })
         this.points = listOfPoints
     }
+
     draw(context) {
         context.beginPath()
         context.moveTo(this.points[0].x, this.points[0].y)
