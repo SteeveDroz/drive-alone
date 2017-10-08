@@ -2,7 +2,7 @@
 
 class TestPoint {
 
-    testCreateOrigin() {
+    testConstructorOrigin() {
         const origin = new Point(0, 0)
         UnitTest.assertDefined(origin.x)
         UnitTest.assertDefined(origin.y)
@@ -10,7 +10,7 @@ class TestPoint {
         UnitTest.assertEqual(0, origin.y)
     }
 
-    testCreate() {
+    testConstructor() {
         const point = new Point(4, 5)
         UnitTest.assertDefined(point.x)
         UnitTest.assertDefined(point.y)
