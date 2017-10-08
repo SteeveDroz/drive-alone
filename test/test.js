@@ -21,7 +21,7 @@ class UnitTest {
             const testObject = new testClass()
             results.innerHTML += `<tr><th colspan="2">${testClass.name||'Please provide a class name'}</th></tr>`
 
-            Object.getOwnPropertyNames(testClass.prototype).forEach(property => {
+            Object.getOwnPropertyNames(Object.getPrototypeOf(testObject)).forEach(property => {
                 if (property != 'constructor' && testObject[property] instanceof Function) {
                     UnitTest.total = 0
                     try {
@@ -84,7 +84,7 @@ class UnitTest {
                     if (expected !== value) throw Error
             }
         } catch (e) {
-            console.log(e.stack);
+            console.log(e.stack)
             throw this.AssertError(expected, value)
         }
     }
