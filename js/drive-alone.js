@@ -12,10 +12,10 @@ const load = function() {
 
     data.cars = []
     for (let i = 0; i < 10; i++) {
-        data.cars.push(Car())
+        data.cars.push(new Car())
     }
 
-    data.path = Path([
+    data.path = new Path([
         [-100, 50],
         [100, 300],
         [200, 400]
