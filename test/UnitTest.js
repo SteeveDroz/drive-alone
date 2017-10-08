@@ -3,6 +3,48 @@
 class UnitTest {
     constructor(tests = []) {
         this.tests = tests
+        this._results = {}
+    }
+
+    run() {
+        this._results = {}
+
+        this.tests.forEach(testClass => {
+            this._results[testClass.name] = {}
+            const testObject = new testClass()
+            results.innerHTML += `<tr><th colspan="2">${testClass.name||'Please provide a class name'}</th></tr>`
+
+            Object.getOwnPropertyNames(Object.getPrototypeOf(testObject)).forEach(property => {
+                if (property != 'constructor' && testObject[property] instanceof Function) {
+                    UnitTest.total = 0
+                    try {
+                        testObject[property]()
+                        this._results[testClass.name][property] = {
+                            success: true,
+                            assertions: UnitTest.total
+                        }
+                    } catch (e) {
+                        if (e.name == 'AssertError') {
+                            this._results[testClass.name][property] = {
+                                success: false,
+                                assertions: UnitTest.total,
+                                message: e.message
+                            }
+                        } else {
+                            this._results[testClass.name][property] = {
+                                success: false,
+                                assertions: 0,
+                                message: e.stack.split(/[\r\n]+/).slice(0, 2).join('')
+                            }
+                        }
+                    }
+                }
+            })
+        })
+    }
+
+    get results() {
+        return this._results
     }
 
     static AssertError(expected, value) {
@@ -14,31 +56,6 @@ class UnitTest {
         }
         error.prototype = Error.prototype
         return error
-    }
-
-    run() {
-        const results = document.getElementById('results')
-
-        this.tests.forEach(testClass => {
-            const testObject = new testClass()
-            results.innerHTML += `<tr><th colspan="2">${testClass.name||'Please provide a class name'}</th></tr>`
-
-            Object.getOwnPropertyNames(Object.getPrototypeOf(testObject)).forEach(property => {
-                if (property != 'constructor' && testObject[property] instanceof Function) {
-                    UnitTest.total = 0
-                    try {
-                        testObject[property]()
-                        results.innerHTML += `<tr><td>${property}()</td><td style="background:green;color:white">OK (${UnitTest.total} assertion${UnitTest.total==1?'':'s'})</td></tr>`
-                    } catch (e) {
-                        if (e.name == 'AssertError') {
-                            results.innerHTML += `<tr><td>${property}()</td><td style="background:red;color:white">${e.message}</td></tr>`
-                        } else {
-                            results.innerHTML += `<tr><td colspan="2" style="background:red;color:white;font-weight:bold;white-space:pre">${e.message} ${(new Error).stack}</td></tr>`
-                        }
-                    }
-                }
-            })
-        })
     }
 
     static assertDefined(value) {

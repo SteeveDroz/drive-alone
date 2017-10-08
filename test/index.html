@@ -10,15 +10,39 @@
     <script src="TestPoint.js"></script>
     <script src="TestSegment.js"></script>
     <script>
-        const test = new UnitTest([
-            TestPoint,
-            TestSegment
-        ])
+        const test = function() {
+            const unitTest = new UnitTest([
+                TestPoint,
+                TestSegment
+            ])
+            unitTest.run()
+            let results = ''
+            for (let className in unitTest.results) {
+                const classResult = unitTest.results[className]
+                results += `<tr><th colspan="2">${className}</th></tr>`
+                for (let property in classResult) {
+                    const propertyResult = classResult[property]
+                    results += `<tr>`
+                    results += `<td>${property}()</td>`
+                    if (propertyResult.success) {
+                        results += `<td style="background:green;color:white">OK (${propertyResult.assertions} assertion${propertyResult.assertions==1?'':'s'})</td>`
+                    } else {
+                        if (propertyResult.assertions > 0) {
+                            results += `<td style="background:red;color:white">${propertyResult.message}</td>`
+                        } else {
+                            results += `<td style="background:darkslategray;color:white">${propertyResult.message}</td>`
+                        }
+                    }
+                    results += `</tr>`
+                }
+            }
+            document.getElementById('results').innerHTML = results
+        }
 
     </script>
 </head>
 
-<body onload="test.run()">
+<body onload="test()">
     <h1>Unit tests</h1>
     <table>
         <thead>
