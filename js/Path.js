@@ -21,7 +21,7 @@ class Path {
         for (let i = 1; i < this.points.length; i++) {
             context.lineTo(this.points[i].x, this.points[i].y)
         }
-        context.strokeStyle = '#f00'
+        context.strokeStyle = '#000'
         context.stroke()
     }
 

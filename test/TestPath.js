@@ -60,4 +60,24 @@ class TestPath {
             UnitTest.fail()
         }
     }
+
+    testDraw() {
+        const canvas = document.createElement('canvas')
+        canvas.width = 2
+        canvas.height = 2
+        const context = canvas.getContext('2d')
+
+        const path = new Path([
+            [0, 0],
+            [2, 2]
+        ])
+
+        path.draw(context)
+
+        const data = context.getImageData(0, 0, 2, 2).data
+        UnitTest.assertEqual(255, data[3]) // Alpha of pixel 1
+        UnitTest.assertEqual(0, data[7]) // Alpha of pixel 2
+        UnitTest.assertEqual(0, data[11]) // Alpha of pixel 3
+        UnitTest.assertEqual(255, data[15]) // Alpha of pixel 4
+    }
 }
