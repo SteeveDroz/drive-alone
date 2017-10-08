@@ -13,6 +13,13 @@ class TestSegment {
         UnitTest.assertEqual(new Point(1, 1), segment.end)
     }
 
+    testMeasureOrientation() {
+        const segment = new Segment(0, 0, 1, 0)
+        UnitTest.assertEqual(-1, segment.measureOrientation(new Point(10, -10)))
+        UnitTest.assertEqual(0, segment.measureOrientation(new Point(10, 0)))
+        UnitTest.assertEqual(1, segment.measureOrientation(new Point(10, 10)))
+    }
+
     testIntersect() {
         // 4 | 4         3
         // 3 | |     2 /

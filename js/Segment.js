@@ -21,19 +21,25 @@ class Segment {
         }
     }
 
-    intersect(segment) {
-        return false
+    measureOrientation(point) {
+        const angle = this.end.measureAngle(this.start)
+        return Math.sign(point.translate(this.start.negate()).rotate(angle).y)
     }
 
-    measureOrientation(point) {
-        if (this.start.y == this.end.y) {
-            const rotatedStart = start.rotate(Math.PI / 2)
-            const rotatedEnd = end.rotate(Math.PI / 2)
-            const rotatedSegment = Segment(rotatedSegment, rotatedEnd)
-            return rotatedSegment.measureOrientation(point.rotate(Math.PI / 2))
+    intersect(other) {
+        const thisStart = other.measureOrientation(this.start)
+        const thisEnd = other.measureOrientation(this.end)
+        const otherStart = this.measureOrientation(other.start)
+        const otherEnd = this.measureOrientation(other.end)
+
+        if (thisStart != 0 && thisEnd != 0) {
+            if (thisStart == thisEnd) return false
         }
 
-        const angle = this.start.measureAngle(this.end)
-        return point.translate(this.end.negate()).rotate(angle).x
+        if (otherStart != 0 && otherEnd != 0) {
+            if (otherStart == otherEnd) return false
+        }
+
+        return true
     }
 }
