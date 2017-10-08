@@ -63,7 +63,7 @@ class Car {
         return segments
     }
 
-    collideWith(path) {}
+    collide(path) {}
 }
 
 const getBest = function(cars) {

@@ -63,4 +63,29 @@ class TestCar {
 
         UnitTest.assertEqual([new Segment(110, 175, 110, 225), new Segment(110, 225, 90, 225), new Segment(90, 225, 90, 175), new Segment(90, 175, 110, 175)], car.getSegments())
     }
+
+    testCollide() {
+        const car1 = new Car()
+        car1.width = 10
+        car1.height = 10
+        car1.angle = 0
+
+        const car2 = new Car()
+        car2.width = 10
+        car2.height = 10
+        car2.angle = Math.PI / 4
+
+        const path1 = new Path([
+            [-100, -100],
+            [-5, 100],
+            [-5, 100],
+            [100, 100]
+        ])
+
+        //TODO Create path2
+
+        UnitTest.assertFalse(car1.collide(path1))
+
+        //TODO Test more collisions
+    }
 }
