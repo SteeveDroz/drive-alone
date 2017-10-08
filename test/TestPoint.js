@@ -49,7 +49,7 @@ class TestPoint {
         UnitTest.assertEqual(new Point(4, 5), point)
     }
 
-    testRotateNoArgument() {
+    testRotateNoArguments() {
         const point = new Point(1, 0)
         UnitTest.assertEqual(new Point(Math.sqrt(3) / 2, 1 / 2), point.rotate(Math.PI / 6), 1e-6)
         UnitTest.assertEqual(new Point(Math.sqrt(2) / 2, Math.sqrt(2) / 2), point.rotate(Math.PI / 4), 1e-6)
@@ -77,7 +77,7 @@ class TestPoint {
         UnitTest.assertEqual(new Point(4, 5), point)
     }
 
-    testMeasureAngleNoArgument() {
+    testMeasureAngleNoArguments() {
         const point1 = new Point(1, 0)
         UnitTest.assertEqual(0, point1.measureAngle(), 1e-6)
 

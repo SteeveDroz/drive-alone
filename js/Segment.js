@@ -13,8 +13,8 @@ class Segment {
                 break
 
             case 4:
-                arguments.forEach(arg => {
-                    if (!(arg instanceof Number)) throw Error
+                [arg1, arg2, arg3, arg4].forEach(arg => {
+                    if (typeof arg !== 'number') throw Error
                 })
                 this.start = new Point(arg1, arg2)
                 this.end = new Point(arg3, arg4)
