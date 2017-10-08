@@ -28,7 +28,7 @@ class Path {
     getSegments() {
         const segments = []
         for (let i = 1; i < this.points.length; i++) {
-            segments.push(Segment(this.points[i - 1], this.points[i]))
+            segments.push(new Segment(this.points[i - 1], this.points[i]))
         }
         return segments
     }

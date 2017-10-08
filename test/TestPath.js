@@ -80,4 +80,14 @@ class TestPath {
         UnitTest.assertEqual(0, data[11]) // Alpha of pixel 3
         UnitTest.assertEqual(255, data[15]) // Alpha of pixel 4
     }
+
+    testSegments() {
+        const path = new Path([
+            [0, 1],
+            [2, 3],
+            [4, 5]
+        ])
+
+        UnitTest.assertEqual([new Segment(0, 1, 2, 3), new Segment(2, 3, 4, 5)], path.getSegments())
+    }
 }
