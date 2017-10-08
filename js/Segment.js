@@ -21,6 +21,10 @@ class Segment {
         }
     }
 
+    intersect(segment) {
+        return false
+    }
+
     measureOrientation(point) {
         if (this.start.y == this.end.y) {
             const rotatedStart = start.rotate(Math.PI / 2)
