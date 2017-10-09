@@ -66,7 +66,7 @@ class UnitTest {
         throw UnitTest.AssertError('fail', 'fail')
     }
 
-    static assertDefined(value) {
+    static assertNotUndefined(value) {
         UnitTest.total += 1
         if (value === undefined) throw UnitTest.AssertError('defined', value)
     }
