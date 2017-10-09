@@ -21,6 +21,8 @@ const load = function() {
         [200, 400]
     ])
 
+    data.target = new Point(0, 0)
+
     setInterval(function() {
         update(data)
         draw(data, world, canvas.width, canvas.height)
@@ -38,12 +40,16 @@ const update = function(data) {
         }
         car.move()
     })
+
+    const bestCar = Car.findBest(cars)
+    data.target = bestCar.location
 }
 
 const draw = function(data, world, width, height) {
     const {
         cars,
-        path
+        path,
+        target
     } = data
 
     world.fillStyle = '#eee'
@@ -51,8 +57,7 @@ const draw = function(data, world, width, height) {
 
     world.save()
 
-    const best = Car.findBest(cars)
-    world.translate(width / 2 - best.location.x, height / 2 - best.location.y)
+    world.translate(width / 2 - target.x, height / 2 - target.y)
 
     world.beginPath()
     for (let i = -1000; i < 1000; i += 50) {

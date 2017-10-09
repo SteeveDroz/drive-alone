@@ -23,21 +23,6 @@ class Segment {
 
     measureOrientation(point) {
         const angle = this.end.measureAngle(this.start)
-        /*console.log('START');
-        console.log('angle:');
-        console.log(angle);
-        console.log('segment:');
-        console.log(JSON.stringify(this));
-        console.log('point:');
-        console.log(JSON.stringify(point));
-        console.log('translate:');
-        console.log(JSON.stringify(point.translate(this.start.negate())));
-        console.log('rotate:');
-        console.log(JSON.stringify(point.translate(this.start.negate()).rotate(-angle)));
-        console.log('y:');
-        console.log(point.translate(this.start.negate()).rotate(-angle).y);
-        console.log('end point after rotation:');
-        console.log(JSON.stringify(this.end.translate(this.start.negate()).rotate(-angle)));*/
         return Math.sign(point.translate(this.start.negate()).rotate(-angle).y)
     }
 
@@ -54,10 +39,6 @@ class Segment {
         if (otherStart != 0 && otherEnd != 0) {
             if (otherStart == otherEnd) return false
         }
-
-        console.log('COLLIDE:');
-        console.log(this);
-        console.log(other);
 
         return true
     }
