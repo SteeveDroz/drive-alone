@@ -77,15 +77,19 @@ class TestCar {
 
         const path1 = new Path([
             [-100, -100],
-            [-5, 100],
+            [-5, -100],
             [-5, 100],
             [100, 100]
         ])
 
-        //TODO Create path2
+        const path2 = new Path([
+            [0, 9.999],
+            [9.999, 0]
+        ])
 
         UnitTest.assertFalse(car1.collide(path1))
-
-        //TODO Test more collisions
+        UnitTest.assertTrue(car1.collide(path2))
+        UnitTest.assertTrue(car2.collide(path1))
+        UnitTest.assertFalse(car2.collide(path2))
     }
 }

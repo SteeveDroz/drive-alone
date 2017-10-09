@@ -63,7 +63,15 @@ class Car {
         return segments
     }
 
-    collide(path) {}
+    collide(path) {
+        let collision = false
+        this.getSegments().forEach(side => {
+            path.getSegments().forEach(wall => {
+                if (side.intersect(wall)) collision = true
+            })
+        })
+        return collision
+    }
 }
 
 const getBest = function(cars) {
