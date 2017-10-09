@@ -68,7 +68,6 @@ class TestPoint {
         UnitTest.assertEqual(new Point(3, 6), point.rotate(Math.PI / 2, center), 1e-6)
         UnitTest.assertEqual(new Point(2, 5), point.rotate(Math.PI, center), 1e-6)
         UnitTest.assertEqual(new Point(4, 5), point.rotate(2 * Math.PI, center), 1e-6)
-
     }
 
     testRotateNotModify() {
