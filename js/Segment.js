@@ -33,13 +33,16 @@ class Segment {
         const otherEnd = this.measureOrientation(other.end)
 
         if (thisStart != 0 && thisEnd != 0) {
-            if (thisStart == thisEnd) return false
+            if (thisStart == thisEnd) return null
         }
 
         if (otherStart != 0 && otherEnd != 0) {
-            if (otherStart == otherEnd) return false
+            if (otherStart == otherEnd) return null
         }
 
-        return true
+        const x = ((this.start.x * this.end.y - this.start.y * this.end.x) * (other.start.x - other.end.x) - (this.start.x - this.end.x) * (other.start.x * other.end.y - other.start.y * other.end.x)) / ((this.start.x - this.end.x) * (other.start.y - other.end.y) - (this.start.y - this.end.y) * (other.start.x - other.end.x))
+
+        const y = ((this.start.x * this.end.y - this.start.y * this.end.x) * (other.start.y - other.end.y) - (this.start.y - this.end.y) * (other.start.x * other.end.y - other.start.y * other.end.x)) / ((this.start.x - this.end.x) * (other.start.y - other.end.y) - (this.start.y - this.end.y) * (other.start.x - other.end.x))
+        return new Point(x, y)
     }
 }

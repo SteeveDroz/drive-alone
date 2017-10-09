@@ -79,7 +79,7 @@ class Car {
         let collision = false
         this.getSegments().forEach(side => {
             path.getSegments().forEach(wall => {
-                if (side.intersect(wall)) collision = true
+                if (side.intersect(wall) !== null) collision = true
             })
         })
         return collision

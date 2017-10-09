@@ -75,6 +75,16 @@ class UnitTest {
         UnitTest.assertEqual(undefined, value)
     }
 
+    static assertNotNull(value) {
+        UnitTest.total += 1
+        if (value === null) throw UnitTest.AssertError('not null', value)
+    }
+
+    static assertNull(value) {
+        UnitTest.total += 1
+        if (value !== null) throw UnitTest.AssertError(null, value)
+    }
+
     static assertTrue(value) {
         UnitTest.assertEqual(true, value)
     }

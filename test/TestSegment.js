@@ -36,20 +36,20 @@ class TestSegment {
         const segment3 = new Segment(2, 1, 5, 4)
         const segment4 = new Segment(0, 2, 0, 4)
 
-        UnitTest.assertTrue(segment1.intersect(segment2))
-        UnitTest.assertTrue(segment1.intersect(segment3))
-        UnitTest.assertFalse(segment1.intersect(segment4))
+        UnitTest.assertEqual(new Point(3, 1), segment1.intersect(segment2), 1e-6)
+        UnitTest.assertEqual(new Point(2, 1), segment1.intersect(segment3), 1e-6)
+        UnitTest.assertNull(segment1.intersect(segment4), 1e-6)
 
-        UnitTest.assertTrue(segment2.intersect(segment1))
-        UnitTest.assertTrue(segment2.intersect(segment3))
-        UnitTest.assertFalse(segment2.intersect(segment4))
+        UnitTest.assertEqual(new Point(3, 1), segment2.intersect(segment1), 1e-6)
+        UnitTest.assertEqual(new Point(3, 2), segment2.intersect(segment3), 1e-6)
+        UnitTest.assertNull(segment2.intersect(segment4), 1e-6)
 
-        UnitTest.assertTrue(segment3.intersect(segment1))
-        UnitTest.assertTrue(segment3.intersect(segment2))
-        UnitTest.assertFalse(segment3.intersect(segment4))
+        UnitTest.assertEqual(new Point(2, 1), segment3.intersect(segment1), 1e-6)
+        UnitTest.assertEqual(new Point(3, 2), segment3.intersect(segment2), 1e-6)
+        UnitTest.assertNull(segment3.intersect(segment4), 1e-6)
 
-        UnitTest.assertFalse(segment4.intersect(segment1))
-        UnitTest.assertFalse(segment4.intersect(segment2))
-        UnitTest.assertFalse(segment4.intersect(segment3))
+        UnitTest.assertNull(segment4.intersect(segment1), 1e-6)
+        UnitTest.assertNull(segment4.intersect(segment2), 1e-6)
+        UnitTest.assertNull(segment4.intersect(segment3), 1e-6)
     }
 }
