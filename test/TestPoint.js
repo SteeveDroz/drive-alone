@@ -49,6 +49,11 @@ class TestPoint {
         UnitTest.assertEqual(new Point(4, 5), point)
     }
 
+    testMultiply() {
+        const point = new Point(4, 5)
+        UnitTest.assertEqual(new Point(6, 7.5), point.multiply(1.5))
+    }
+
     testRotateNoArguments() {
         const point = new Point(1, 0)
         UnitTest.assertEqual(new Point(Math.sqrt(3) / 2, 1 / 2), point.rotate(Math.PI / 6), 1e-6)
@@ -123,5 +128,29 @@ class TestPoint {
 
         const point = new Point(4, 5)
         UnitTest.assertEqual(0, point.measureAngle(point), 1e-6)
+    }
+
+    testGetVector() {
+        const point = new Point(4, 5)
+        UnitTest.assertEqual(new Point(3, 1), point.getVector(7, 6))
+    }
+
+    testGetDistance() {
+        const point = new Point(4, 5)
+        UnitTest.assertEqual(5, point.getDistance(new Point(8, 8)))
+    }
+
+    testGetNormalizedVector() {
+        const point = new Point(4, 5)
+        UnitTest.assertEqual(new Point(4 / 5, 3 / 5), point.getNormalizedVector(new Point(8, 8)), 1e-6)
+
+        UnitTest.assertEqual(new Point(0, 0), point.getNormalizedVector(point), 1e-6)
+
+        UnitTest.assertEqual(new Point(1, 0), point.getNormalizedVector(new Point(4.5, 5)), 1e-6)
+    }
+
+    testGetVectorOfLength() {
+        const point = new Point(4, 3)
+        UnitTest.assertEqual(new Point(1.6, 1.2), point.getVectorOfLength(2), 1e-6)
     }
 }

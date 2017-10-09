@@ -32,17 +32,22 @@ const load = function() {
 const update = function(data) {
     const {
         cars,
-        path
+        path,
+        target
     } = data
     cars.forEach(car => {
         if (car.collide(path)) {
             car.working = false
+            car.color = '#800'
         }
         car.move()
     })
 
     const bestCar = Car.findBest(cars)
-    data.target = bestCar.location
+    bestCar.color = '#f80'
+
+    const targetDisplacement = bestCar.location.translate(target.negate()).getVectorOfLength(Math.min(10, bestCar.location.getDistance(target)))
+    data.target = data.target.translate(targetDisplacement)
 }
 
 const draw = function(data, world, width, height) {
@@ -74,6 +79,9 @@ const draw = function(data, world, width, height) {
 
     world.fillStyle = '#f00'
     world.fillRect(-2, -2, 4, 4)
+
+    world.fillStyle = '#00f'
+    world.fillRect(target.x - 2, target.y - 2, 4, 4)
 
     world.restore()
 }
