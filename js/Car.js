@@ -15,6 +15,18 @@ class Car {
         this.working = true
     }
 
+    static findBest(cars) {
+        return cars.reduce((a, b) => {
+            if (!a.working) {
+                return b
+            }
+            if (!b.working) {
+                return a
+            }
+            return a.fitness > b.fitness ? a : b
+        }, cars[0])
+    }
+
     move() {
         if (this.working) {
             this.angle += this.steer
@@ -72,16 +84,4 @@ class Car {
         })
         return collision
     }
-}
-
-const getBest = function(cars) {
-    return cars.reduce((a, b) => {
-        if (!a.working) {
-            return b
-        }
-        if (!b.working) {
-            return a
-        }
-        return a.fitness > b.fitness ? a : b
-    }, cars[0])
 }

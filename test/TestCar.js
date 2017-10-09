@@ -92,4 +92,23 @@ class TestCar {
         UnitTest.assertTrue(car2.collide(path1))
         UnitTest.assertFalse(car2.collide(path2))
     }
+
+    testFindBest() {
+        const car1 = new Car()
+        car1.fitness = 1000
+
+        const car2 = new Car()
+        car2.fitness = 1000
+
+        const car3 = new Car()
+        car3.fitness = 1000
+
+        const car4 = new Car()
+        car4.fitness = 1001
+
+        const car5 = new Car()
+        car5.fitness = 1000
+
+        UnitTest.assertEqual(car4, Car.findBest([car1, car2, car3, car4]))
+    }
 }

@@ -44,7 +44,7 @@ const draw = function(data, world, width, height) {
     world.fillRect(0, 0, width, height)
 
     world.save()
-    const best = getBest(cars)
+    const best = Car.findBest(cars)
     world.translate(width / 2 - best.location.x, height / 2 - best.location.y)
 
     world.beginPath()
