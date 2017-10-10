@@ -43,9 +43,25 @@ class Car {
         context.save()
         context.translate(this.location.x, this.location.y)
         context.rotate(this.angle)
+
         context.fillRect(-this.width / 2, -this.height / 2, this.width, this.height)
         context.strokeRect(-this.width / 2, -this.height / 2, this.width, this.height)
+
         context.restore()
+
+        this.drawBeam(context, this.beamCenter)
+        this.drawBeam(context, this.beamRight)
+        this.drawBeam(context, this.beamFarRight)
+        this.drawBeam(context, this.beamLeft)
+        this.drawBeam(context, this.beamFarLeft)
+    }
+
+    drawBeam(context, beam) {
+        context.beginPath()
+        context.moveTo(beam.start.x, beam.start.y)
+        context.lineTo(beam.end.x, beam.end.y)
+        context.strokeStyle = '#aaf'
+        context.stroke()
     }
 
     getCorners() {
@@ -83,5 +99,32 @@ class Car {
             })
         })
         return collision
+    }
+
+    useCaptors(path) {
+        const maxDistance = 200
+
+        this.beamFarLeft = this.calculateBeam(-Math.PI / 4, path, maxDistance)
+        this.beamLeft = this.calculateBeam(-Math.PI / 8, path, maxDistance)
+        this.beamCenter = this.calculateBeam(0, path, maxDistance)
+        this.beamRight = this.calculateBeam(Math.PI / 8, path, maxDistance)
+        this.beamFarRight = this.calculateBeam(Math.PI / 4, path, maxDistance)
+    }
+
+    calculateBeam(angle, path, maxDistance) {
+        const target = new Point(maxDistance, 0).rotate(this.angle + angle).translate(this.location)
+
+        let shortSegment = new Segment(this.location.x, this.location.y, target.x, target.y)
+
+        const that = this
+
+        path.getSegments().forEach(function(segment) {
+            const intersection = shortSegment.intersect(segment)
+            if (intersection != null) {
+                shortSegment = new Segment(that.location.x, that.location.y, intersection.x, intersection.y)
+            }
+        })
+
+        return shortSegment
     }
 }

@@ -11,7 +11,7 @@ const load = function() {
     const data = {}
 
     data.cars = []
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 1; i++) {
         data.cars.push(new Car())
     }
 
@@ -38,8 +38,9 @@ const update = function(data) {
     cars.forEach(car => {
         if (car.collide(path)) {
             car.working = false
-            car.color = '#800'
+            car.color = '#888'
         }
+        car.useCaptors(path)
         car.move()
     })
 
@@ -76,12 +77,6 @@ const draw = function(data, world, width, height) {
 
     cars.forEach(car => car.draw(world))
     path.draw(world)
-
-    world.fillStyle = '#f00'
-    world.fillRect(-2, -2, 4, 4)
-
-    world.fillStyle = '#00f'
-    world.fillRect(target.x - 2, target.y - 2, 4, 4)
 
     world.restore()
 }
