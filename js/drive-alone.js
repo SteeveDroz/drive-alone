@@ -11,7 +11,7 @@ const load = function() {
     const data = {}
 
     data.cars = []
-    for (let i = 0; i < 1; i++) {
+    for (let i = 0; i < 10; i++) {
         data.cars.push(new Car())
     }
 
