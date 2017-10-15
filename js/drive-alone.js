@@ -2,7 +2,7 @@
 
 console.log('LOAD — drive-alone.js')
 
-const load = function() {
+const loadWorld = function() {
     const canvas = document.getElementById('world')
     canvas.width = 300
     canvas.height = 300
@@ -24,12 +24,12 @@ const load = function() {
     data.target = new Point(0, 0)
 
     setInterval(function() {
-        update(data)
-        draw(data, world, canvas.width, canvas.height)
+        updateWorld(data)
+        drawWorld(data, world, canvas.width, canvas.height)
     }, 10)
 }
 
-const update = function(data) {
+const updateWorld = function(data) {
     const {
         cars,
         path,
@@ -55,7 +55,7 @@ const update = function(data) {
     data.target = data.target.translate(targetDisplacement)
 }
 
-const draw = function(data, world, width, height) {
+const drawWorld = function(data, world, width, height) {
     const {
         cars,
         path,

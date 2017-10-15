@@ -140,6 +140,5 @@ class Car {
 
         this.speed = data[0]
         this.steer = data[1] / 50
-        console.log(this.speed);
     }
 }

@@ -10,12 +10,23 @@
     <script src="js/Segment.js"></script>
     <script src="js/ai/Brain.js"></script>
     <script src="js/ai/Neuron.js"></script>
+
     <script src="js/drive-alone.js"></script>
+    <script src="js/use-brain.js"></script>
+
+    <script>
+        const load = function() {
+            loadWorld()
+            loadBrain()
+        }
+
+    </script>
 </head>
 
 <body onload="load()">
     <h1>Drive Alone</h1>
     <canvas id="world"></canvas>
+    <canvas id="brain"></canvas>
 </body>
 
 </html>
