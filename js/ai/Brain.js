@@ -8,16 +8,18 @@ class Brain {
             for (let j = 0; j < layers[i]; j++) {
                 if (i == 0) {
                     neurons[i].push({
-                        value: 0,
                         evaluate: function() {
-                            return value
-                        }
+                            return 0
+                        },
+                        name: '0-' + j
                     })
                 } else {
                     const neuron = new Neuron()
                     for (let k = 0; k < neurons[i - 1].length; k++) {
                         neuron.addInput(neurons[i - 1][k])
                     }
+                    neuron.name = i + '-' + j
+                    neurons[i].push(neuron)
                 }
             }
         }
@@ -30,11 +32,14 @@ class Brain {
         }
 
         for (let i = 0; i < inputs.length; i++) {
-            this.neurons[0][i].value = inputs[i]
+            this.neurons[0][i].evaluate = function() {
+                return inputs[i]
+            }
         }
 
-        return this.neurons[this.neurons.length - 1].map(function(neuron) {
+        const data = this.neurons[this.neurons.length - 1].map(function(neuron) {
             return neuron.evaluate()
         })
+        return data
     }
 }

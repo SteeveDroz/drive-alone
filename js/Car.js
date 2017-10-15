@@ -13,6 +13,7 @@ class Car {
         this.fitness = 0
         this.color = '#440'
         this.working = true
+        this.brain = new Brain(5, 4, 3, 2)
     }
 
     static findBest(cars) {
@@ -126,5 +127,19 @@ class Car {
         })
 
         return shortSegment
+    }
+
+    useBrain() {
+        let data =
+            this.brain.evaluate(
+                this.beamFarLeft.getLength(),
+                this.beamLeft.getLength(),
+                this.beamCenter.getLength(),
+                this.beamRight.getLength(),
+                this.beamFarRight.getLength())
+
+        this.speed = data[0]
+        this.steer = data[1] / 50
+        console.log(this.speed);
     }
 }

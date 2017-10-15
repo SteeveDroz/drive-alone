@@ -35,13 +35,15 @@ const update = function(data) {
         path,
         target
     } = data
+
     cars.forEach(car => {
         if (car.collide(path)) {
             car.working = false
             car.color = '#888'
         }
-        car.useCaptors(path)
         car.move()
+        car.useCaptors(path)
+        car.useBrain()
     })
 
     const bestCar = Car.findBest(cars)

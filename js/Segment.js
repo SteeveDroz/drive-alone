@@ -21,6 +21,10 @@ class Segment {
         }
     }
 
+    getLength() {
+        return this.end.getDistance(this.start)
+    }
+
     measureOrientation(point) {
         const angle = this.end.measureAngle(this.start)
         return Math.sign(point.translate(this.start.negate()).rotate(-angle).y)

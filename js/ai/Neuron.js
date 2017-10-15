@@ -4,7 +4,7 @@ class Neuron {
 
     constructor() {
         this.inputs = []
-        this.bias = 0
+        this.bias = Math.random() * 2 - 1
     }
 
     static sigmoid(z) {
@@ -12,9 +12,9 @@ class Neuron {
     }
 
     addInput(source) {
-        inputs.push({
+        this.inputs.push({
             source: source,
-            weight: 1
+            weight: Math.random() * 2 - 1
         })
     }
 
@@ -22,7 +22,7 @@ class Neuron {
         const sum = this.inputs.map(function(input) {
             return input.source.evaluate() * input.weight
         }).reduce(function(a, b) {
-            a + b
+            return a + b
         }, 0)
         return Neuron.sigmoid(sum + this.bias)
     }
