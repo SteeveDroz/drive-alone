@@ -40,6 +40,8 @@ const update = function(data) {
         if (car.collide(path)) {
             car.working = false
             car.color = '#888'
+        } else {
+            car.color = '#440'
         }
         car.move()
         car.useCaptors(path)
