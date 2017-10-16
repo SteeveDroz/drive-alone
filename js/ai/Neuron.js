@@ -26,5 +26,4 @@ class Neuron {
         }, 0)
         return Neuron.sigmoid(sum + this.bias)
     }
-
 }

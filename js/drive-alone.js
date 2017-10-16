@@ -50,6 +50,7 @@ const updateWorld = function(data) {
 
     const bestCar = Car.findBest(cars)
     bestCar.color = '#f80'
+    sharedElements.bestCar = bestCar
 
     const targetDisplacement = bestCar.location.translate(target.negate()).getVectorOfLength(Math.min(10, bestCar.location.getDistance(target)))
     data.target = data.target.translate(targetDisplacement)
