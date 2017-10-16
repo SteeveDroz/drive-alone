@@ -3,14 +3,15 @@
 console.log('LOAD — car.js')
 
 class Car {
-    constructor() {
-        this.location = new Point(0, 0)
+    constructor(x = 0, y = 0) {
+        this.start = new Point(x, y)
+        this.location = new Point(x, y)
         this.width = 50
         this.height = 30
         this.angle = Math.random() * 2 * Math.PI
         this.speed = Math.random() * 0.2 + 0.9
         this.steer = Math.random() * 0.05 - 0.025
-        this.fitness = 0
+        this.totalDistance = 0
         this.color = '#440'
         this.working = true
         this.brain = new Brain(5, 4, 3, 2)
@@ -24,8 +25,12 @@ class Car {
             if (!b.working) {
                 return a
             }
-            return a.fitness > b.fitness ? a : b
+            return a.getFitness() > b.getFitness() ? a : b
         }, cars[0])
+    }
+
+    getFitness() {
+        return this.totalDistance + this.location.getDistance(this.start)
     }
 
     move() {
@@ -33,7 +38,7 @@ class Car {
             this.angle += this.steer
             this.location.x += Math.cos(this.angle) * this.speed
             this.location.y += Math.sin(this.angle) * this.speed
-            this.fitness += this.speed
+            this.totalDistance += this.speed
         }
     }
 
