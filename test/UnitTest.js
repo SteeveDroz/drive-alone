@@ -36,6 +36,7 @@ class UnitTest {
                                 assertions: 0,
                                 message: e.stack.split(/[\r\n]+/).slice(0, 2).join('')
                             }
+                            console.log(e.stack);
                         }
                     }
                 }

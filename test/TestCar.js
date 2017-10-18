@@ -13,7 +13,7 @@ class TestCar {
         UnitTest.assertTrue(car.speed < 1.1)
         UnitTest.assertTrue(car.steer >= -0.025)
         UnitTest.assertTrue(car.steer < 0.025)
-        UnitTest.assertEqual(0, car.fitness)
+        UnitTest.assertEqual(0, car.getFitness())
         UnitTest.assertTrue(car.working)
     }
 
@@ -26,18 +26,18 @@ class TestCar {
         car.move()
         UnitTest.assertEqual(new Point(1, 0), car.location)
         UnitTest.assertEqual(1, car.speed)
-        UnitTest.assertEqual(1, car.fitness)
+        UnitTest.assertEqual(2, car.getFitness())
         UnitTest.assertEqual(0, car.angle)
 
-        car.steer = Math.PI / 6
+        car.steer = Math.PI / 2
         car.move()
-        UnitTest.assertEqual(new Point(1 + Math.sqrt(3) / 2, 0.5), car.location, 1e-6)
+        UnitTest.assertEqual(new Point(1, 1), car.location, 1e-6)
         UnitTest.assertEqual(1, car.speed)
-        UnitTest.assertEqual(2, car.fitness)
-        UnitTest.assertEqual(Math.PI / 6, car.angle, 1e-6)
+        UnitTest.assertEqual(2 + Math.sqrt(2), car.getFitness(), 1e-6)
+        UnitTest.assertEqual(Math.PI / 2, car.angle, 1e-6)
 
         car.move()
-        UnitTest.assertEqual(Math.PI / 3, car.angle, 1e-6)
+        UnitTest.assertEqual(Math.PI, car.angle, 1e-6)
     }
 
     testDraw() {
