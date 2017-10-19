@@ -8,6 +8,8 @@ const loadMinimap = function() {
 
     const data = {}
 
+    data.ratio = 0.2
+
     setInterval(function() {
         updateMinimap(data)
         drawMinimap(data, minimap, canvas.width, canvas.height)
@@ -22,13 +24,17 @@ const drawMinimap = function(data, minimap, width, height) {
         cars
     } = sharedElements
 
+    const {
+        ratio
+    } = data
+
     minimap.fillStyle = '#eee'
     minimap.fillRect(0, 0, width, height)
 
     minimap.save()
-    minimap.scale(0.1, 0.1)
+    minimap.scale(ratio, ratio)
     minimap.translate(200, 200)
-    minimap.lineWidth = 10
+    minimap.lineWidth = 1 / ratio
     paths.forEach(path => {
         path.draw(minimap)
     })
