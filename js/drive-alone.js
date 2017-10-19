@@ -39,7 +39,21 @@ const loadWorld = function() {
         [200, 50],
         [800, 100],
         [900, 200],
-        [700, 200]
+        [700, 200],
+        [300, 250],
+        [100, 300],
+        [50, 400],
+        [100, 500],
+        [200, 550],
+        [800, 500],
+        [1100, 500],
+        [1300, 400],
+        [2000, 450],
+        [2100, 550]
+    ]), new Path([
+        [1200, 300],
+        [2000, 400],
+        [2100, 300]
     ])]
 
     sharedElements.paths = data.paths
@@ -67,16 +81,17 @@ const updateWorld = function(data) {
 
         data.cars = newCars
 
-        data.countdown = data.initialCountdown
+        data.generation++
+            data.countdown = data.initialCountdown
     }
 
     const {
         cars,
         paths,
-        target,
-        generation
+        target
     } = data
 
+    let atLeastOneWorking = false
     cars.forEach(car => {
         if (car.collide(paths)) {
             car.working = false
@@ -84,10 +99,17 @@ const updateWorld = function(data) {
         } else {
             car.color = '#440'
         }
+        if (car.working) {
+            atLeastOneWorking = true
+        }
         car.move()
         car.useCaptors(paths)
         car.useBrain()
     })
+
+    if (!atLeastOneWorking) {
+        data.countdown = 0
+    }
 
     sharedElements.cars = cars
 
