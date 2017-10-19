@@ -56,7 +56,6 @@ class Car {
         context.strokeRect(-this.width / 2, -this.height / 2, this.width, this.height)
 
         context.restore()
-
         this.drawBeam(context, this.beamCenter)
         this.drawBeam(context, this.beamRight)
         this.drawBeam(context, this.beamFarRight)
@@ -109,14 +108,14 @@ class Car {
         return collision
     }
 
-    useCaptors(path) {
+    useCaptors(paths) {
         const maxDistance = 200
 
-        this.beamFarLeft = this.calculateBeam(-Math.PI / 4, path, maxDistance)
-        this.beamLeft = this.calculateBeam(-Math.PI / 8, path, maxDistance)
-        this.beamCenter = this.calculateBeam(0, path, maxDistance)
-        this.beamRight = this.calculateBeam(Math.PI / 8, path, maxDistance)
-        this.beamFarRight = this.calculateBeam(Math.PI / 4, path, maxDistance)
+        this.beamFarLeft = this.calculateBeam(-Math.PI / 4, paths, maxDistance)
+        this.beamLeft = this.calculateBeam(-Math.PI / 8, paths, maxDistance)
+        this.beamCenter = this.calculateBeam(0, paths, maxDistance)
+        this.beamRight = this.calculateBeam(Math.PI / 8, paths, maxDistance)
+        this.beamFarRight = this.calculateBeam(Math.PI / 4, paths, maxDistance)
     }
 
     calculateBeam(angle, paths, maxDistance) {
@@ -147,5 +146,10 @@ class Car {
 
         this.speed = Util.map(data[0], [0, 1], [-2, 2])
         this.steer = Util.map(data[1], [0, 1], [-0.05, 0.05])
+    }
+
+    mate(other) {
+        const child = new Car()
+        return child
     }
 }

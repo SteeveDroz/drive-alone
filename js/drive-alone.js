@@ -11,6 +11,7 @@ const loadWorld = function() {
     const data = {}
 
     data.generation = 0
+    data.countdown = data.initialCountdown = 1000
 
     data.cars = []
     for (let i = 0; i < 10; i++) {
@@ -36,6 +37,22 @@ const loadWorld = function() {
 }
 
 const updateWorld = function(data) {
+    if (--data.countdown < 0) {
+        const rankedCars = data.cars.sort((a, b) => a.getFitness() - b.getFitness())
+        const newCars = []
+        newCars.push(rankedCars[9])
+        for (let i = 0; i < 8; i++) {
+            const car1 = rankedCars[Math.floor(Util.map(Math.random(), [0, 1], [1, 9]))]
+            const car2 = rankedCars[Math.floor(Util.map(Math.random(), [0, 1], [1, 9]))]
+            newCars.push(car1.mate(car2))
+        }
+        newCars.push(new Car())
+
+        data.cars = newCars
+
+        data.countdown = data.initialCountdown
+    }
+
     const {
         cars,
         paths,
@@ -95,7 +112,7 @@ const drawWorld = function(data, world, width, height) {
 
     world.restore()
 
-    world.strokeStyle = '#000'
     world.fillStyle = '#000'
     world.fillText(`Generation: ${generation}`, 0, 10)
+    world.fillText(`Countdown: ${data.countdown}`, 0, 20)
 }
