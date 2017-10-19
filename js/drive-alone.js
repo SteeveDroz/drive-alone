@@ -10,6 +10,8 @@ const loadWorld = function() {
 
     const data = {}
 
+    data.generation = 0
+
     data.cars = []
     for (let i = 0; i < 10; i++) {
         data.cars.push(new Car())
@@ -37,7 +39,8 @@ const updateWorld = function(data) {
     const {
         cars,
         paths,
-        target
+        target,
+        generation
     } = data
 
     cars.forEach(car => {
@@ -64,7 +67,8 @@ const drawWorld = function(data, world, width, height) {
     const {
         cars,
         paths,
-        target
+        target,
+        generation
     } = data
 
     world.fillStyle = '#eee'
@@ -90,4 +94,8 @@ const drawWorld = function(data, world, width, height) {
     })
 
     world.restore()
+
+    world.strokeStyle = '#000'
+    world.fillStyle = '#000'
+    world.fillText(`Generation: ${generation}`, 0, 10)
 }
