@@ -19,14 +19,16 @@ const loadWorld = function() {
     }
 
     data.paths = [new Path([
-        [-100, 50],
-        [100, 300],
-        [200, 400]
+        [-100, -100],
+        [100, -100],
+        [200, -50]
     ]), new Path([
-        [100, 50],
-        [300, 300],
-        [400, 400]
+        [-100, -100],
+        [-100, 100],
+        [100, 100]
     ])]
+
+    sharedElements.paths = data.paths
 
     data.target = new Point(0, 0)
 
@@ -72,6 +74,8 @@ const updateWorld = function(data) {
         car.useCaptors(paths)
         car.useBrain()
     })
+
+    sharedElements.cars = cars
 
     const bestCar = Car.findBest(cars)
     bestCar.color = '#f80'

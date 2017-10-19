@@ -15,12 +15,14 @@
 
     <script src="js/drive-alone.js"></script>
     <script src="js/use-brain.js"></script>
+    <script src="js/minimap.js"></script>
 
     <script>
         const sharedElements = {}
         const load = function() {
             loadWorld()
             loadBrain()
+            loadMinimap()
         }
 
     </script>
@@ -28,8 +30,13 @@
 
 <body onload="load()">
     <h1>Drive Alone</h1>
-    <canvas id="world"></canvas>
-    <canvas id="brain"></canvas>
+    <div>
+        <canvas id="world"></canvas>
+        <canvas id="brain"></canvas>
+    </div>
+    <div>
+        <canvas id="minimap"></canvas>
+    </div>
 </body>
 
 </html>
