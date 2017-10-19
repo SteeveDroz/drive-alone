@@ -38,7 +38,7 @@ class Car {
     }
 
     getFitness() {
-        return 0.1 * this.totalDistance + this.maxDistanceFromStart
+        return 0.01 * this.totalDistance + this.maxDistanceFromStart
     }
 
     move() {
@@ -157,6 +157,7 @@ class Car {
 
     mate(other) {
         const child = new Car()
+        child.brain = this.brain.mate(other.brain)
         return child
     }
 }

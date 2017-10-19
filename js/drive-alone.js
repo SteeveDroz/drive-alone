@@ -73,11 +73,13 @@ const updateWorld = function(data) {
 
         newCars.push(rankedCars[9].clone())
         for (let i = 0; i < 8; i++) {
-            const car1 = rankedCars[Math.floor(Util.map(Math.random(), [0, 1], [1, 9]))]
-            const car2 = rankedCars[Math.floor(Util.map(Math.random(), [0, 1], [1, 9]))]
+            const car1 = rankedCars[Math.floor(Util.map(Math.random(), [0, 1], [0, 5]))]
+            const car2 = rankedCars[Math.floor(Util.map(Math.random(), [0, 1], [0, 5]))]
             newCars.push(car1.mate(car2))
         }
-        newCars.push(new Car())
+        for (let i = 6; i < 10; i++) {
+            newCars.push(new Car())
+        }
 
         data.cars = newCars
 

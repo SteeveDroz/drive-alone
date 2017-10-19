@@ -2,6 +2,7 @@
 
 class Brain {
     constructor(...layers) {
+        this.layers = layers
         const neurons = []
         for (let i = 0; i < layers.length; i++) {
             neurons[i] = []
@@ -41,5 +42,15 @@ class Brain {
             return neuron.evaluate()
         })
         return data
+    }
+
+    mate(other) {
+        const child = new Brain(...this.layers)
+        for (let layerId = 1; layerId < child.neurons.length; layerId++) {
+            for (let neuronId = 0; neuronId < child.neurons[layerId].length; neuronId++) {
+                child.neurons[layerId][neuronId] = this.neurons[layerId][neuronId].mate(other.neurons[layerId][neuronId])
+            }
+        }
+        return child
     }
 }
