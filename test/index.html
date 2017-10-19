@@ -39,7 +39,8 @@
                     results += `<tr>`
                     results += `<td>${property}()</td>`
                     if (propertyResult.success) {
-                        results += `<td style="background:green;color:white">OK (${propertyResult.assertions} assertion${propertyResult.assertions==1?'':'s'})</td>`
+                        const color = propertyResult.assertions == 0 ? 'orange' : 'green'
+                        results += `<td style="background:${color};color:white">OK (${propertyResult.assertions} assertion${propertyResult.assertions==1?'':'s'})</td>`
                     } else {
                         if (propertyResult.assertions > 0) {
                             results += `<td style="background:red;color:white">Failed assertion ${propertyResult.assertions}:<br>${propertyResult.message}</td>`
