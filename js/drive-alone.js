@@ -40,7 +40,8 @@ const updateWorld = function(data) {
     if (--data.countdown < 0) {
         const rankedCars = data.cars.sort((a, b) => a.getFitness() - b.getFitness())
         const newCars = []
-        newCars.push(rankedCars[9])
+
+        newCars.push(rankedCars[9].clone())
         for (let i = 0; i < 8; i++) {
             const car1 = rankedCars[Math.floor(Util.map(Math.random(), [0, 1], [1, 9]))]
             const car2 = rankedCars[Math.floor(Util.map(Math.random(), [0, 1], [1, 9]))]

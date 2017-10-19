@@ -6,10 +6,10 @@ class Car {
     constructor(x = 0, y = 0) {
         this.start = new Point(x, y)
         this.location = new Point(x, y)
-        this.maxDistanceFromSrtart = 0
+        this.maxDistanceFromStart = 0
         this.width = 50
         this.height = 30
-        this.angle = Math.random() * 2 * Math.PI
+        this.angle = 0
         this.speed = Math.random() * 0.2 + 0.9
         this.steer = Math.random() * 0.05 - 0.025
         this.totalDistance = 0
@@ -30,8 +30,15 @@ class Car {
         }, cars[0])
     }
 
+    clone() {
+        const clone = new Car()
+        clone.start = this.start
+        clone.brain = this.brain
+        return clone
+    }
+
     getFitness() {
-        return 0.1 * this.totalDistance + this.maxDistanceFromSrtart
+        return 0.1 * this.totalDistance + this.maxDistanceFromStart
     }
 
     move() {
@@ -40,7 +47,7 @@ class Car {
             this.location.x += Math.cos(this.angle) * this.speed
             this.location.y += Math.sin(this.angle) * this.speed
             this.totalDistance += this.speed
-            this.maxDistanceFromSrtart = Math.max(this.maxDistanceFromSrtart, this.location.getDistance(this.start))
+            this.maxDistanceFromStart = Math.max(this.maxDistanceFromStart, this.location.getDistance(this.start))
         }
     }
 
