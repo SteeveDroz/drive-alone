@@ -19,6 +19,10 @@ const loadWorld = function() {
         [-100, 50],
         [100, 300],
         [200, 400]
+    ]), new Path([
+        [100, 50],
+        [300, 300],
+        [400, 400]
     ])]
 
     data.target = new Point(0, 0)

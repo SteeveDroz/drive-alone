@@ -75,22 +75,22 @@ class TestCar {
         car2.height = 10
         car2.angle = Math.PI / 4
 
-        const path1 = new Path([
+        const paths1 = [new Path([
             [-100, -100],
             [-5.01, -100],
             [-5.01, 100],
             [100, 100]
-        ])
+        ])]
 
-        const path2 = new Path([
+        const paths2 = [new Path([
             [0, 9.999],
             [9.999, 0]
-        ])
+        ])]
 
-        UnitTest.assertFalse(car1.collide(path1))
-        UnitTest.assertTrue(car1.collide(path2))
-        UnitTest.assertTrue(car2.collide(path1))
-        UnitTest.assertFalse(car2.collide(path2))
+        UnitTest.assertFalse(car1.collide(paths1))
+        UnitTest.assertTrue(car1.collide(paths2))
+        UnitTest.assertTrue(car2.collide(paths1))
+        UnitTest.assertFalse(car2.collide(paths2))
     }
 
     testFindBest() {
