@@ -4,7 +4,7 @@ class Neuron {
 
     constructor() {
         this.inputs = []
-        this.bias = Math.random()
+        this.bias = Util.map(Math.random(), [0, 1], [-10, 10])
     }
 
     static sigmoid(z) {
@@ -14,7 +14,7 @@ class Neuron {
     addInput(source) {
         this.inputs.push({
             source: source,
-            weight: Math.random()
+            weight: Util.map(Math.random(), [0, 1], [-10, 10])
         })
     }
 

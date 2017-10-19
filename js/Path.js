@@ -15,6 +15,14 @@ class Path {
         this.points = listOfPoints
     }
 
+    static getAllSegments(paths) {
+        const segments = []
+        paths.forEach(path => {
+            segments.push(...path.getSegments())
+        })
+        return segments
+    }
+
     draw(context) {
         context.beginPath()
         context.moveTo(this.points[0].x, this.points[0].y)

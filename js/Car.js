@@ -6,6 +6,7 @@ class Car {
     constructor(x = 0, y = 0) {
         this.start = new Point(x, y)
         this.location = new Point(x, y)
+        this.maxDistanceFromSrtart = 0
         this.width = 50
         this.height = 30
         this.angle = Math.random() * 2 * Math.PI
@@ -30,7 +31,7 @@ class Car {
     }
 
     getFitness() {
-        return this.totalDistance + this.location.getDistance(this.start)
+        return 0.1 * this.totalDistance + this.maxDistanceFromSrtart
     }
 
     move() {
@@ -39,6 +40,7 @@ class Car {
             this.location.x += Math.cos(this.angle) * this.speed
             this.location.y += Math.sin(this.angle) * this.speed
             this.totalDistance += this.speed
+            this.maxDistanceFromSrtart = Math.max(this.maxDistanceFromSrtart, this.location.getDistance(this.start))
         }
     }
 
@@ -97,10 +99,10 @@ class Car {
         return segments
     }
 
-    collide(path) {
+    collide(paths) {
         let collision = false
-        this.getSegments().forEach(side => {
-            path.getSegments().forEach(wall => {
+        Path.getAllSegments(paths).forEach(wall => {
+            this.getSegments().forEach(side => {
                 if (side.intersect(wall) !== null) collision = true
             })
         })
@@ -117,14 +119,14 @@ class Car {
         this.beamFarRight = this.calculateBeam(Math.PI / 4, path, maxDistance)
     }
 
-    calculateBeam(angle, path, maxDistance) {
+    calculateBeam(angle, paths, maxDistance) {
         const target = new Point(maxDistance, 0).rotate(this.angle + angle).translate(this.location)
 
         let shortSegment = new Segment(this.location.x, this.location.y, target.x, target.y)
 
         const that = this
 
-        path.getSegments().forEach(function(segment) {
+        Path.getAllSegments(paths).forEach(function(segment) {
             const intersection = shortSegment.intersect(segment)
             if (intersection != null) {
                 shortSegment = new Segment(that.location.x, that.location.y, intersection.x, intersection.y)
@@ -143,7 +145,7 @@ class Car {
                 this.beamRight.getLength(),
                 this.beamFarRight.getLength())
 
-        this.speed = Util.map(data[0], [0, 1], [-100, 100])
-        this.steer = Util.map(data[1], [0, 1], [-0.1, 0.1])
+        this.speed = Util.map(data[0], [0, 1], [-2, 2])
+        this.steer = Util.map(data[1], [0, 1], [-0.05, 0.05])
     }
 }

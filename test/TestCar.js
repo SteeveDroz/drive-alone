@@ -26,14 +26,14 @@ class TestCar {
         car.move()
         UnitTest.assertEqual(new Point(1, 0), car.location)
         UnitTest.assertEqual(1, car.speed)
-        UnitTest.assertEqual(2, car.getFitness())
+        UnitTest.assertEqual(1.1, car.getFitness())
         UnitTest.assertEqual(0, car.angle)
 
         car.steer = Math.PI / 2
         car.move()
         UnitTest.assertEqual(new Point(1, 1), car.location, 1e-6)
         UnitTest.assertEqual(1, car.speed)
-        UnitTest.assertEqual(2 + Math.sqrt(2), car.getFitness(), 1e-6)
+        UnitTest.assertEqual(0.2 + Math.sqrt(2), car.getFitness(), 1e-6)
         UnitTest.assertEqual(Math.PI / 2, car.angle, 1e-6)
 
         car.move()

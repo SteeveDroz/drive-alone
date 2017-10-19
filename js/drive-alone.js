@@ -15,11 +15,11 @@ const loadWorld = function() {
         data.cars.push(new Car())
     }
 
-    data.path = new Path([
+    data.paths = [new Path([
         [-100, 50],
         [100, 300],
         [200, 400]
-    ])
+    ])]
 
     data.target = new Point(0, 0)
 
@@ -32,19 +32,19 @@ const loadWorld = function() {
 const updateWorld = function(data) {
     const {
         cars,
-        path,
+        paths,
         target
     } = data
 
     cars.forEach(car => {
-        if (car.collide(path)) {
+        if (car.collide(paths)) {
             car.working = false
             car.color = '#888'
         } else {
             car.color = '#440'
         }
         car.move()
-        car.useCaptors(path)
+        car.useCaptors(paths)
         car.useBrain()
     })
 
@@ -59,7 +59,7 @@ const updateWorld = function(data) {
 const drawWorld = function(data, world, width, height) {
     const {
         cars,
-        path,
+        paths,
         target
     } = data
 
@@ -81,7 +81,9 @@ const drawWorld = function(data, world, width, height) {
     world.stroke()
 
     cars.forEach(car => car.draw(world))
-    path.draw(world)
+    paths.forEach(path => {
+        path.draw(world)
+    })
 
     world.restore()
 }
