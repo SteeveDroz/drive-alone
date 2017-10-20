@@ -38,7 +38,7 @@ class Car {
     }
 
     getFitness() {
-        return 0.01 * this.totalDistance + this.maxDistanceFromStart
+        return 0.001 * this.totalDistance + this.maxDistanceFromStart
     }
 
     move() {
