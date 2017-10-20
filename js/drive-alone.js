@@ -69,30 +69,14 @@ const loadWorld = function() {
 const updateWorld = function(data) {
     if (--data.countdown < 0) {
         const rankedCars = data.cars.sort((a, b) => a.getFitness() - b.getFitness()).reverse()
-        const newCars = []
-
-        const newBest = rankedCars[0].clone()
-        newBest.color = '#44f'
-        newCars.push(newBest)
-        for (let i = 0; i < 8; i++) {
-            const id1 = Math.floor(Util.map(Math.random(), [0, 1], [0, 5]))
-            let id2 = -1
-            do {
-                id2 = Math.floor(Util.map(Math.random(), [0, 1], [0, 5]))
-            } while (id1 == id2)
-
-            const car1 = rankedCars[id1]
-            const car2 = rankedCars[id2]
-            newCars.push(car1.mate(car2))
+        data.cars = []
+        for (let i = 0; i < 4; i++) {
+            data.cars = data.cars.concat(rankedCars[i].createNextGeneration(4 - i))
         }
-        for (let i = 0; i < 5; i++) {
-            newCars.push(new Car())
-        }
+        data.cars.push(new Car())
 
-        data.cars = newCars
-
-        data.generation++
-            data.countdown = data.initialCountdown
+        data.generation += 1
+        data.countdown = data.initialCountdown
     }
 
     const {
@@ -117,8 +101,6 @@ const updateWorld = function(data) {
         car.useBrain()
     })
 
-    cars[9].color = cars[9].working ? '#44f' : '#88f'
-
     if (!atLeastOneWorking) {
         data.countdown = 0
     }
@@ -126,7 +108,7 @@ const updateWorld = function(data) {
     sharedElements.cars = cars
 
     const bestCar = Car.findBest(cars)
-    bestCar.color = bestCar == cars[9] ? '#00f' : '#f80'
+    bestCar.color = '#f80'
     sharedElements.bestCar = bestCar
 
     const targetDisplacement = bestCar.location.translate(target.negate()).getVectorOfLength(Math.min(10, bestCar.location.getDistance(target)))

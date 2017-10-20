@@ -155,9 +155,14 @@ class Car {
         this.steer = Util.map(data[1], [0, 1], [-0.05, 0.05])
     }
 
-    mate(other) {
-        const child = new Car()
-        child.brain = this.brain.mate(other.brain)
-        return child
+    createNextGeneration(size = 10) {
+        const nextGeneration = []
+        for (let i = 0; i < size; i++) {
+            const modifiedBrain = this.brain.createAlteration()
+            const car = new Car()
+            car.brain = modifiedBrain
+            nextGeneration.push(car)
+        }
+        return nextGeneration
     }
 }

@@ -44,13 +44,20 @@ class Brain {
         return data
     }
 
-    mate(other) {
-        const child = new Brain(...this.layers)
-        for (let layerId = 1; layerId < child.neurons.length; layerId++) {
-            for (let neuronId = 0; neuronId < child.neurons[layerId].length; neuronId++) {
-                child.neurons[layerId][neuronId] = this.neurons[layerId][neuronId].mate(other.neurons[layerId][neuronId])
+    createAlteration() {
+        const brain = new Brain(...this.layers)
+        for (let layer = 1; layer < brain.neurons.length; layer++) {
+            for (let neuron = 0; neuron < brain.neurons[layer].length; neuron++) {
+                for (let input = 0; input < brain.neurons[layer][neuron].inputs.length; input++) {
+                    const weight = this.neurons[layer][neuron].inputs[input].weight
+
+                    brain.neurons[layer][neuron].inputs[input].weight = weight + Util.map(Math.random(), [0, 1], [-weight / 10, weight / 10])
+                }
+                const bias = this.neurons[layer][neuron].bias
+
+                brain.neurons[layer][neuron].bias = bias + Util.map(Math.random(), [0, 1], [-bias / 10, bias / 10])
             }
         }
-        return child
+        return brain
     }
 }
