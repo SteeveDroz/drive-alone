@@ -49,11 +49,17 @@ class Brain {
         for (let layer = 1; layer < brain.neurons.length; layer++) {
             for (let neuron = 0; neuron < brain.neurons[layer].length; neuron++) {
                 for (let input = 0; input < brain.neurons[layer][neuron].inputs.length; input++) {
-                    const weight = this.neurons[layer][neuron].inputs[input].weight
+                    let weight = this.neurons[layer][neuron].inputs[input].weight
+                    if (Math.random() < 0.01) {
+                        weight += Util.map(Math.random(), [0, 1], [-10, 10])
+                    }
 
                     brain.neurons[layer][neuron].inputs[input].weight = weight + Util.map(Math.random(), [0, 1], [-weight / 10, weight / 10])
                 }
-                const bias = this.neurons[layer][neuron].bias
+                let bias = this.neurons[layer][neuron].bias
+                if (Math.random() < 0.01) {
+                    bias += Util.map(Math.random(), [0, 1], [-10, 10])
+                }
 
                 brain.neurons[layer][neuron].bias = bias + Util.map(Math.random(), [0, 1], [-bias / 10, bias / 10])
             }
