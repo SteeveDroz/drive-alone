@@ -71,7 +71,8 @@ const updateWorld = function(data) {
         const rankedCars = data.cars.sort((a, b) => a.getFitness() - b.getFitness()).reverse()
         data.cars = []
         for (let i = 0; i < 4; i++) {
-            data.cars = data.cars.concat(rankedCars[i].createNextGeneration(4 - i))
+            data.cars = data.cars.concat(rankedCars[i].createNextGeneration(3 - i))
+            data.cars.push(rankedCars[i].clone())
         }
         data.cars.push(new Car())
 
