@@ -6,6 +6,8 @@ class Car {
     constructor(x = 0, y = 0) {
         this.start = new Point(x, y)
         this.location = new Point(x, y)
+        this.fitness = 500
+        this.fitnessOrigin = new Point(x, y)
         this.maxDistanceFromStart = 0
         this.width = 50
         this.height = 30
@@ -18,7 +20,7 @@ class Car {
         this.brain = new Brain(5, 4, 3, 2)
     }
 
-    static findBest(cars) {
+    static findBest(cars, checkpoints) {
         return cars.reduce((a, b) => {
             if (!a.working) {
                 return b
@@ -26,7 +28,7 @@ class Car {
             if (!b.working) {
                 return a
             }
-            return a.getFitness() > b.getFitness() ? a : b
+            return a.getFitness(checkpoints) > b.getFitness(checkpoints) ? a : b
         }, cars[0])
     }
 
@@ -37,8 +39,19 @@ class Car {
         return clone
     }
 
-    getFitness() {
-        return 0.001 * this.totalDistance + this.maxDistanceFromStart
+    getFitness(checkpoints) {
+        let closestCheckpoint = -1
+        let distanceCheckpoint = Infinity
+
+        for (let i = 0; i < checkpoints.length; i++) {
+            const distance = this.location.getDistance(checkpoints[i])
+            if (distance < distanceCheckpoint) {
+                distanceCheckpoint = distance
+                closestCheckpoint = i
+            }
+        }
+
+        return 1000 * closestCheckpoint + distanceCheckpoint
     }
 
     move() {
@@ -48,6 +61,15 @@ class Car {
             this.location.y += Math.sin(this.angle) * this.speed
             this.totalDistance += this.speed
             this.maxDistanceFromStart = Math.max(this.maxDistanceFromStart, this.location.getDistance(this.start))
+
+            if (this.location.getDistance(this.fitnessOrigin) > 50) {
+                this.fitness += 200
+                this.fitnessOrigin = this.location
+            }
+            this.fitness -= 1
+            if (this.fitness <= 0) {
+                this.working = false
+            }
         }
     }
 

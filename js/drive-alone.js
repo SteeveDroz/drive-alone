@@ -24,7 +24,7 @@ const loadWorld = function() {
         [200, -50],
         [300, -50],
         [1000, 0],
-        [1200, 100],
+        [1000, 100],
         [1200, 300],
         [1000, 400],
         [700, 400],
@@ -38,7 +38,7 @@ const loadWorld = function() {
         [100, 80],
         [200, 50],
         [800, 100],
-        [900, 200],
+        [1000, 300],
         [700, 200],
         [300, 250],
         [100, 300],
@@ -58,6 +58,31 @@ const loadWorld = function() {
 
     sharedElements.paths = data.paths
 
+    data.checkpoints = [new Point(0, 0),
+        new Point(200, 0),
+        new Point(400, 20),
+        new Point(600, 40),
+        new Point(800, 60),
+        new Point(950, 150),
+        new Point(1050, 240),
+        new Point(1000, 350),
+        new Point(800, 300),
+        new Point(600, 320),
+        new Point(400, 320),
+        new Point(200, 400),
+        new Point(400, 470),
+        new Point(600, 470),
+        new Point(800, 460),
+        new Point(1000, 450),
+        new Point(1200, 350),
+        new Point(1400, 375),
+        new Point(1800, 400),
+        new Point(2000, 425),
+        new Point(2200, 450),
+    ]
+
+    sharedElements.checkpoints = data.checkpoints
+
     data.target = new Point(0, 0)
 
     setInterval(function() {
@@ -68,7 +93,7 @@ const loadWorld = function() {
 
 const updateWorld = function(data) {
     if (--data.countdown < 0) {
-        const rankedCars = data.cars.sort((a, b) => a.getFitness() - b.getFitness()).reverse()
+        const rankedCars = data.cars.sort((a, b) => a.getFitness(data.checkpoints) - b.getFitness(data.checkpoints)).reverse()
         data.cars = []
         for (let i = 0; i < 4; i++) {
             data.cars = data.cars.concat(rankedCars[i].createNextGeneration(3 - i))
@@ -83,7 +108,8 @@ const updateWorld = function(data) {
     const {
         cars,
         paths,
-        target
+        target,
+        checkpoints
     } = data
 
     let atLeastOneWorking = false
@@ -108,7 +134,7 @@ const updateWorld = function(data) {
 
     sharedElements.cars = cars
 
-    const bestCar = Car.findBest(cars)
+    const bestCar = Car.findBest(cars, data.checkpoints)
     bestCar.color = '#f80'
     sharedElements.bestCar = bestCar
 
@@ -151,5 +177,5 @@ const drawWorld = function(data, world, width, height) {
     world.fillStyle = '#000'
     world.fillText(`Generation: ${generation}`, 0, 10)
     world.fillText(`Countdown: ${data.countdown}`, 0, 20)
-    world.fillText(`Fitness: ${Car.findBest(cars).getFitness()}`, 0, 30)
+    world.fillText(`Fitness: ${Car.findBest(cars, data.checkpoints).getFitness(data.checkpoints)}`, 0, 30)
 }

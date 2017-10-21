@@ -21,7 +21,8 @@ const updateMinimap = function(data) {}
 const drawMinimap = function(data, minimap, width, height) {
     const {
         paths,
-        cars
+        cars,
+        checkpoints
     } = sharedElements
 
     const {
@@ -37,6 +38,13 @@ const drawMinimap = function(data, minimap, width, height) {
     minimap.lineWidth = 1 / ratio
     paths.forEach(path => {
         path.draw(minimap)
+    })
+
+    minimap.fillStyle = '#f00'
+    checkpoints.forEach(checkpoint => {
+        minimap.beginPath()
+        minimap.arc(checkpoint.x, checkpoint.y, 15, 0, 2 * Math.PI)
+        minimap.fill()
     })
 
     cars.forEach(car => {
