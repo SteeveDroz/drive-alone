@@ -11,7 +11,7 @@ const loadWorld = function() {
     const data = {}
 
     data.generation = 0
-    data.countdown = data.initialCountdown = 2000
+    data.countdown = data.initialCountdown = 10000
 
     data.cars = []
     for (let i = 0; i < 10; i++) {
