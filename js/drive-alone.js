@@ -13,11 +13,6 @@ const loadWorld = function() {
     data.generation = 0
     data.countdown = data.initialCountdown = 10000
 
-    data.cars = []
-    for (let i = 0; i < 10; i++) {
-        data.cars.push(new Car())
-    }
-
     data.paths = [new Path([
         [-80, -80],
         [100, -80],
@@ -83,6 +78,11 @@ const loadWorld = function() {
 
     sharedElements.checkpoints = data.checkpoints
 
+    data.cars = []
+    for (let i = 0; i < 10; i++) {
+        data.cars.push(new Car(data.checkpoints))
+    }
+
     data.target = new Point(0, 0)
 
     setInterval(function() {
@@ -93,13 +93,13 @@ const loadWorld = function() {
 
 const updateWorld = function(data) {
     if (--data.countdown < 0) {
-        const rankedCars = data.cars.sort((a, b) => a.getFitness(data.checkpoints) - b.getFitness(data.checkpoints)).reverse()
+        const rankedCars = data.cars.sort((a, b) => a.getFitness() - b.getFitness()).reverse()
         data.cars = []
         for (let i = 0; i < 4; i++) {
             data.cars = data.cars.concat(rankedCars[i].createNextGeneration(3 - i))
             data.cars.push(rankedCars[i].clone())
         }
-        data.cars.push(new Car())
+        data.cars.push(new Car(data.checkpoints))
 
         data.generation += 1
         data.countdown = data.initialCountdown
@@ -108,8 +108,7 @@ const updateWorld = function(data) {
     const {
         cars,
         paths,
-        target,
-        checkpoints
+        target
     } = data
 
     let atLeastOneWorking = false
@@ -130,11 +129,12 @@ const updateWorld = function(data) {
 
     if (!atLeastOneWorking) {
         data.countdown = 0
+        data.target = new Point(0, 0)
     }
 
     sharedElements.cars = cars
 
-    const bestCar = Car.findBest(cars, data.checkpoints)
+    const bestCar = Car.findBest(cars)
     bestCar.color = '#f80'
     sharedElements.bestCar = bestCar
 
@@ -177,5 +177,6 @@ const drawWorld = function(data, world, width, height) {
     world.fillStyle = '#000'
     world.fillText(`Generation: ${generation}`, 0, 10)
     world.fillText(`Countdown: ${data.countdown}`, 0, 20)
-    world.fillText(`Fitness: ${Car.findBest(cars, data.checkpoints).getFitness(data.checkpoints)}`, 0, 30)
+    world.fillText(`Fitness: ${Car.findBest(cars).getFitness()}`, 0, 30)
+    world.fillText(`Car life: ${Car.findBest(cars).countdown}`, 0, 40)
 }
