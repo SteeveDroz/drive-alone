@@ -176,7 +176,7 @@ class Car {
                 this.beamRight.getLength(),
                 this.beamFarRight.getLength())
 
-        this.speed = Util.map(data[0], [0, 1], [-2, 2])
+        this.speed = Util.map(data[0], [0, 1], [-2, 3])
         this.steer = Util.map(data[1], [0, 1], [-0.05, 0.05])
     }
 

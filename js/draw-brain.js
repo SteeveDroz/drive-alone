@@ -31,11 +31,6 @@ const drawBrain = function(data, brain, width, height) {
             const neuron = neurons[i][j]
             const center = getCenter(i, j)
 
-            brain.beginPath()
-            brain.arc(center.x, center.y, i == 0 ? 10 : Math.abs(neuron.bias) * 2, 0, 2 * Math.PI, 0, 0)
-            brain.fillStyle = neuron.bias < 0.5 ? '#f00' : '#00f'
-            brain.fill()
-
             if (i > 0) {
                 for (let k = 0; k < neuron.inputs.length; k++) {
                     const inputCenter = getCenter(i - 1, k)
@@ -47,6 +42,18 @@ const drawBrain = function(data, brain, width, height) {
                     brain.stroke()
                 }
             }
+        }
+    }
+
+    for (let i = 0; i < neurons.length; i++) {
+        for (let j = 0; j < neurons[i].length; j++) {
+            const neuron = neurons[i][j]
+            const center = getCenter(i, j)
+
+            brain.beginPath()
+            brain.arc(center.x, center.y, i == 0 ? 10 : Math.abs(neuron.bias) * 2, 0, 2 * Math.PI, 0, 0)
+            brain.fillStyle = neuron.bias < 0.5 ? '#f00' : '#00f'
+            brain.fill()
         }
     }
 }
