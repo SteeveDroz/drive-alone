@@ -41,10 +41,10 @@ class Car {
     }
 
     getFitness() {
-        if (this.lastCheckpoint == 0) {
-            return this.getDistanceToRelativeCheckpoint(0)
+        if (this.lastCheckpoint >= this.checkpoints.length - 1) {
+            return Infinity
         }
-        return 1000 * this.lastCheckpoint + this.getDistanceToRelativeCheckpoint(-1)
+        return 1000 * (this.lastCheckpoint + 1) - this.getDistanceToRelativeCheckpoint(1)
     }
 
     move() {
