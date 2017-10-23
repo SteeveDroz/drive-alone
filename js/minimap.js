@@ -10,10 +10,12 @@ const loadMinimap = function() {
 
     data.ratio = 0.2
 
-    setInterval(function() {
-        updateMinimap(data)
-        drawMinimap(data, minimap, canvas.width, canvas.height)
-    }, 10)
+    setTimeout(() => {
+        setInterval(function() {
+            updateMinimap(data)
+            drawMinimap(data, minimap, canvas.width, canvas.height)
+        }, 10)
+    }, 1000)
 }
 
 const updateMinimap = function(data) {}
@@ -52,14 +54,9 @@ const drawMinimap = function(data, minimap, width, height) {
         car.draw(minimap)
     })
 
-    minimap.strokeStyle = '#00f'
+    minimap.strokeStyle = '#888'
     minimap.lineWidth = 10
-    minimap.beginPath()
-    minimap.moveTo(target.x - 50, target.y)
-    minimap.lineTo(target.x + 50, target.y)
-    minimap.moveTo(target.x, target.y - 50)
-    minimap.lineTo(target.x, target.y + 50)
-    minimap.stroke()
+    minimap.strokeRect(target.x - 150, target.y - 150, 300, 300)
 
     minimap.restore()
 }
