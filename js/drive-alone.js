@@ -206,7 +206,5 @@ const drawWorld = function(data, world, width, height) {
 
     world.fillStyle = '#000'
     world.fillText(`Generation: ${generation}`, 0, 10)
-    world.fillText(`Countdown: ${data.countdown}`, 0, 20)
-    world.fillText(`Fitness: ${Car.findBest(cars).getFitness()}`, 0, 30)
-    world.fillText(`Cars alive: ${data.numberWorking}`, 0, 40)
+    world.fillText(`Cars alive: ${data.numberWorking}`, 0, 20)
 }
