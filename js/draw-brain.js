@@ -11,7 +11,7 @@ const loadBrain = function() {
     setInterval(function() {
         updateBrain(data)
         drawBrain(data, brain, canvas.width, canvas.height)
-    })
+    }, 10)
 }
 
 const updateBrain = function(data) {
@@ -38,7 +38,7 @@ const drawBrain = function(data, brain, width, height) {
                     brain.moveTo(center.x, center.y)
                     brain.lineTo(inputCenter.x, inputCenter.y)
                     brain.lineWidth = Math.abs(neuron.inputs[k].weight)
-                    brain.strokeStyle = neuron.inputs[k].weight < 0.5 ? '#f00' : '#00f'
+                    brain.strokeStyle = neuron.inputs[k].weight < 0 ? '#f00' : '#00f'
                     brain.stroke()
                 }
             }
@@ -54,7 +54,7 @@ const drawBrain = function(data, brain, width, height) {
 
             brain.beginPath()
             brain.arc(center.x, center.y, i == 0 ? 10 : Math.abs(neuron.bias) * 2, 0, 2 * Math.PI, 0, 0)
-            brain.fillStyle = neuron.bias < 0.5 ? '#f00' : '#00f'
+            brain.fillStyle = neuron.bias < 0 ? '#f00' : '#00f'
             brain.fill()
             brain.stroke()
         }
