@@ -8,7 +8,7 @@ I decided to retro-engineer that, **without a glimpse at the source code**. Also
 
 ### Graphics
 
-Displaying the cars, the truck, the captors, etc. is a project in itself.
+Displaying the cars, the track, the captors, etc. is a project in itself.
 
 ### Neural network
 
