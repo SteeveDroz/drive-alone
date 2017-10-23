@@ -22,7 +22,8 @@ const drawMinimap = function(data, minimap, width, height) {
     const {
         paths,
         cars,
-        checkpoints
+        checkpoints,
+        target
     } = sharedElements
 
     const {
@@ -50,6 +51,15 @@ const drawMinimap = function(data, minimap, width, height) {
     cars.forEach(car => {
         car.draw(minimap)
     })
+
+    minimap.strokeStyle = '#00f'
+    minimap.lineWidth = 10
+    minimap.beginPath()
+    minimap.moveTo(target.x - 50, target.y)
+    minimap.lineTo(target.x + 50, target.y)
+    minimap.moveTo(target.x, target.y - 50)
+    minimap.lineTo(target.x, target.y + 50)
+    minimap.stroke()
 
     minimap.restore()
 }

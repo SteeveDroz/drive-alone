@@ -20,6 +20,10 @@ class Point {
         return new Point(this.x * factor, this.y * factor)
     }
 
+    getMiddle(other, percentage = 0.5) {
+        return new Point((1 - percentage) * this.x + percentage * other.x, (1 - percentage) * this.y + percentage * other.y)
+    }
+
     rotate(angle, center = new Point(0, 0)) {
         return this.translate(center.negate()).rotateAroundOrigin(angle).translate(center)
     }
