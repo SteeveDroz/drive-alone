@@ -171,12 +171,28 @@ const drawWorld = function(data, world, width, height) {
 
     world.translate(width / 2 - target.x, height / 2 - target.y)
 
+    let minX = Infinity
+    let maxX = -Infinity
+    let minY = Infinity
+    let maxY = -Infinity
+
+    paths.forEach(path => {
+        path.getSegments().forEach(segment => {
+            minX = Math.min(minX, Math.min(segment.start.x, segment.end.x))
+            maxX = Math.max(maxX, Math.max(segment.start.x, segment.end.x))
+            minY = Math.min(minY, Math.min(segment.start.y, segment.end.y))
+            maxY = Math.max(maxY, Math.max(segment.start.y, segment.end.y))
+        })
+    })
+
     world.beginPath()
-    for (let i = -1000; i < 1000; i += 50) {
-        world.moveTo(i, -1000)
-        world.lineTo(i, 1000)
-        world.moveTo(-1000, i)
-        world.lineTo(1000, i)
+    for (let i = minX - 100; i < maxX + 100; i += 50) {
+        world.moveTo(i, minY - 100)
+        world.lineTo(i, maxY + 100)
+    }
+    for (let i = minY - 100; i < maxY + 100; i += 50) {
+        world.moveTo(minX - 100, i)
+        world.lineTo(maxX + 100, i)
     }
     world.strokeStyle = '#ccc'
     world.stroke()
