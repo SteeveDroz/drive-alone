@@ -55,7 +55,7 @@ class Car {
             this.totalDistance += this.speed
             this.maxDistanceFromStart = Math.max(this.maxDistanceFromStart, this.location.getDistance(this.start))
 
-            if (this.getFitness() < this.maxFitness + 10) {
+            if (this.getFitness() < this.maxFitness + 100) {
                 if (--this.countdown < 0) {
                     this.working = false
                 }

@@ -152,7 +152,6 @@ const updateWorld = function(data) {
     sharedElements.bestCar = bestCar
 
     const targetDisplacement = bestCar.location.translate(target.negate()).getVectorOfLength(Math.min(10, bestCar.location.getDistance(target)))
-    // data.target = data.target.translate(targetDisplacement)
     data.target = target.getMiddle(bestCar.location, 0.1)
     sharedElements.target = data.target
 }
