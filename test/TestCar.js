@@ -2,7 +2,8 @@
 
 class TestCar {
     testContructor() {
-        const car = new Car()
+        const checkpoints = [new Point(0, 0), new Point(100, 0)]
+        const car = new Car(checkpoints)
         UnitTest.assertTrue(car instanceof Car)
         UnitTest.assertEqual(new Point(0, 0), car.location)
         UnitTest.assertEqual(50, car.width)
@@ -13,12 +14,13 @@ class TestCar {
         UnitTest.assertTrue(car.speed < 1.1)
         UnitTest.assertTrue(car.steer >= -0.025)
         UnitTest.assertTrue(car.steer < 0.025)
-        UnitTest.assertEqual(0, car.getFitness())
+        UnitTest.assertEqual(900, car.getFitness())
         UnitTest.assertTrue(car.working)
     }
 
     testMove() {
-        const car = new Car()
+        const checkpoints = [new Point(0, 0), new Point(100, 0)]
+        const car = new Car(checkpoints)
         car.angle = 0
         car.speed = 1
         car.steer = 0
@@ -26,14 +28,14 @@ class TestCar {
         car.move()
         UnitTest.assertEqual(new Point(1, 0), car.location)
         UnitTest.assertEqual(1, car.speed)
-        UnitTest.assertEqual(1.1, car.getFitness())
+        UnitTest.assertEqual(901, car.getFitness())
         UnitTest.assertEqual(0, car.angle)
 
         car.steer = Math.PI / 2
         car.move()
         UnitTest.assertEqual(new Point(1, 1), car.location, 1e-6)
         UnitTest.assertEqual(1, car.speed)
-        UnitTest.assertEqual(0.2 + Math.sqrt(2), car.getFitness(), 1e-6)
+        UnitTest.assertEqual(1000 - Math.sqrt(99 * 99 + 1), car.getFitness(), 1e-6)
         UnitTest.assertEqual(Math.PI / 2, car.angle, 1e-6)
 
         car.move()
@@ -51,7 +53,7 @@ class TestCar {
         car.height = 50
         car.angle = 0
 
-        UnitTest.assertEqual([new Point(110, 175), new Point(110, 225), new Point(90, 225), new Point(90, 175)], car.getCorners())
+        UnitTest.assertEqual([new Point(110, 225), new Point(110, 175), new Point(90, 175), new Point(90, 225)], car.getCorners())
     }
 
     testGetSegments() {
@@ -61,7 +63,7 @@ class TestCar {
         car.height = 50
         car.angle = 0
 
-        UnitTest.assertEqual([new Segment(110, 175, 110, 225), new Segment(110, 225, 90, 225), new Segment(90, 225, 90, 175), new Segment(90, 175, 110, 175)], car.getSegments())
+        UnitTest.assertEqual([new Segment(110, 225, 110, 175), new Segment(110, 175, 90, 175), new Segment(90, 175, 90, 225), new Segment(90, 225, 110, 225)], car.getSegments())
     }
 
     testCollide() {
@@ -94,19 +96,20 @@ class TestCar {
     }
 
     testFindBest() {
-        const car1 = new Car()
+        const checkpoints = [new Point(0, 0), new Point(100, 0)]
+        const car1 = new Car(checkpoints)
         car1.fitness = 1000
 
-        const car2 = new Car()
+        const car2 = new Car(checkpoints)
         car2.fitness = 1000
 
-        const car3 = new Car()
+        const car3 = new Car(checkpoints)
         car3.fitness = 1000
 
-        const car4 = new Car()
+        const car4 = new Car(checkpoints)
         car4.fitness = 1001
 
-        const car5 = new Car()
+        const car5 = new Car(checkpoints)
         car5.fitness = 1000
 
         UnitTest.assertEqual(car4, Car.findBest([car1, car2, car3, car4]))
