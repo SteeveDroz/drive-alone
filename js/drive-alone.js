@@ -198,7 +198,10 @@ const drawWorld = function(data, world, width, height) {
     world.strokeStyle = '#ccc'
     world.stroke()
 
-    cars.forEach(car => car.draw(world))
+    cars.forEach(car => {
+        car.draw(world)
+    })
+
     paths.forEach(path => {
         path.draw(world)
     })

@@ -104,13 +104,13 @@ class Car {
         const distance = Math.sqrt(this.width * this.width + this.height * this.height) / 2
         const angle = Math.atan(this.height / this.width)
 
-        corners.push(new Point(this.location.x + Math.cos(angle + this.angle) * distance, this.location.y - Math.sin(angle + this.angle) * distance))
+        corners.push(new Point(this.location.x + Math.cos(angle + this.angle) * distance, this.location.y + Math.sin(angle + this.angle) * distance))
 
-        corners.push(new Point(this.location.x + Math.cos(-angle + this.angle) * distance, this.location.y - Math.sin(-angle + this.angle) * distance))
+        corners.push(new Point(this.location.x + Math.cos(-angle + this.angle) * distance, this.location.y + Math.sin(-angle + this.angle) * distance))
 
-        corners.push(new Point(this.location.x + Math.cos(Math.PI + angle + this.angle) * distance, this.location.y - Math.sin(Math.PI + angle + this.angle) * distance))
+        corners.push(new Point(this.location.x + Math.cos(Math.PI + angle + this.angle) * distance, this.location.y + Math.sin(Math.PI + angle + this.angle) * distance))
 
-        corners.push(new Point(this.location.x + Math.cos(Math.PI - angle + this.angle) * distance, this.location.y - Math.sin(Math.PI - angle + this.angle) * distance))
+        corners.push(new Point(this.location.x + Math.cos(Math.PI - angle + this.angle) * distance, this.location.y + Math.sin(Math.PI - angle + this.angle) * distance))
 
         return corners
     }
