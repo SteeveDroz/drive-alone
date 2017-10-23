@@ -20,12 +20,18 @@ const loadWorld = function() {
         [300, -50],
         [1000, 0],
         [1000, 100],
-        [1200, 300],
+        [1150, 250],
+        [1150, 350],
         [1000, 400],
         [700, 400],
         [700, 350],
         [650, 350],
         [650, 400],
+        [300, 400],
+        [300, 380],
+        [260, 380],
+        [260, 420],
+        [300, 420],
         [300, 400]
     ]), new Path([
         [-80, -80],
@@ -33,7 +39,7 @@ const loadWorld = function() {
         [100, 80],
         [200, 50],
         [800, 100],
-        [1000, 300],
+        [950, 250],
         [700, 200],
         [300, 250],
         [100, 300],
@@ -46,9 +52,13 @@ const loadWorld = function() {
         [2000, 450],
         [2100, 550]
     ]), new Path([
+        [1150, 350],
         [1200, 300],
         [2000, 400],
         [2100, 300]
+    ]), new Path([
+        [1100, 250],
+        [1050, 350]
     ])]
 
     sharedElements.paths = data.paths
@@ -69,7 +79,7 @@ const loadWorld = function() {
         new Point(600, 470),
         new Point(800, 460),
         new Point(1000, 450),
-        new Point(1200, 350),
+        new Point(1200, 380),
         new Point(1400, 375),
         new Point(1800, 400),
         new Point(2000, 425),
@@ -115,9 +125,11 @@ const updateWorld = function(data) {
     cars.forEach(car => {
         if (car.collide(paths)) {
             car.working = false
-            car.color = '#888'
-        } else {
+        }
+        if (car.working) {
             car.color = '#440'
+        } else {
+            car.color = '#888'
         }
         if (car.working) {
             atLeastOneWorking = true
