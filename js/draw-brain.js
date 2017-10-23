@@ -45,6 +45,8 @@ const drawBrain = function(data, brain, width, height) {
         }
     }
 
+    brain.strokeStyle = '#000'
+    brain.lineWidth = 2
     for (let i = 0; i < neurons.length; i++) {
         for (let j = 0; j < neurons[i].length; j++) {
             const neuron = neurons[i][j]
@@ -54,6 +56,7 @@ const drawBrain = function(data, brain, width, height) {
             brain.arc(center.x, center.y, i == 0 ? 10 : Math.abs(neuron.bias) * 2, 0, 2 * Math.PI, 0, 0)
             brain.fillStyle = neuron.bias < 0.5 ? '#f00' : '#00f'
             brain.fill()
+            brain.stroke()
         }
     }
 }

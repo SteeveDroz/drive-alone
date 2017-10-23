@@ -105,7 +105,7 @@ const updateWorld = function(data) {
     if (--data.countdown < 0) {
         const rankedCars = data.cars.sort((a, b) => a.getFitness() - b.getFitness()).reverse()
         data.cars = []
-        for (let i = 0; i < 4; i++) {
+        for (let i = 0; i < 3; i++) {
             data.cars = data.cars.concat(rankedCars[i].createNextGeneration(3 - i))
             data.cars.push(rankedCars[i].clone())
         }
@@ -121,7 +121,7 @@ const updateWorld = function(data) {
         target
     } = data
 
-    let atLeastOneWorking = false
+    let numberWorking = 0
     cars.forEach(car => {
         if (car.collide(paths)) {
             car.working = false
@@ -132,17 +132,18 @@ const updateWorld = function(data) {
             car.color = '#888'
         }
         if (car.working) {
-            atLeastOneWorking = true
+            numberWorking++
         }
         car.move()
         car.useCaptors(paths)
         car.useBrain()
     })
 
-    if (!atLeastOneWorking) {
+    if (numberWorking == 0) {
         data.countdown = 0
         data.target = new Point(0, 0)
     }
+    data.numberWorking = numberWorking
 
     sharedElements.cars = cars
 
@@ -159,7 +160,8 @@ const drawWorld = function(data, world, width, height) {
         cars,
         paths,
         target,
-        generation
+        generation,
+        numberWorking
     } = data
 
     world.fillStyle = '#eee'
@@ -190,5 +192,5 @@ const drawWorld = function(data, world, width, height) {
     world.fillText(`Generation: ${generation}`, 0, 10)
     world.fillText(`Countdown: ${data.countdown}`, 0, 20)
     world.fillText(`Fitness: ${Car.findBest(cars).getFitness()}`, 0, 30)
-    world.fillText(`Car life: ${Car.findBest(cars).countdown}`, 0, 40)
+    world.fillText(`Cars alive: ${data.numberWorking}`, 0, 40)
 }
