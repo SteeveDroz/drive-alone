@@ -56,9 +56,6 @@ const loadWorld = function() {
         [1200, 300],
         [2000, 400],
         [2100, 300]
-    ]), new Path([
-        [1100, 250],
-        [1050, 350]
     ])]
 
     sharedElements.paths = data.paths
@@ -104,7 +101,7 @@ const loadWorld = function() {
 
 const updateWorld = function(data) {
     if (--data.countdown < 0) {
-        const rankedCars = data.cars.sort((a, b) => a.getFitness() - b.getFitness()).reverse()
+        const rankedCars = data.cars.sort(Car.compare).reverse()
         data.cars = []
         for (let i = 0; i < 3; i++) {
             data.cars = data.cars.concat(rankedCars[i].createNextGeneration(3 - i))

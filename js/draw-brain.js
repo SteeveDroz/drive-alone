@@ -23,7 +23,7 @@ const drawBrain = function(data, brain, width, height) {
         neurons
     } = data
 
-    brain.fillStyle = '#000'
+    brain.fillStyle = '#888'
     brain.fillRect(0, 0, width, height)
 
     for (let i = 0; i < neurons.length; i++) {
@@ -38,14 +38,14 @@ const drawBrain = function(data, brain, width, height) {
                     brain.moveTo(center.x, center.y)
                     brain.lineTo(inputCenter.x, inputCenter.y)
                     brain.lineWidth = Math.abs(neuron.inputs[k].weight)
-                    brain.strokeStyle = neuron.inputs[k].weight < 0 ? '#f00' : '#00f'
+                    brain.strokeStyle = neuron.inputs[k].weight < 0 ? '#000' : '#fff'
                     brain.stroke()
                 }
             }
         }
     }
 
-    brain.strokeStyle = '#000'
+    brain.strokeStyle = '#888'
     brain.lineWidth = 2
     for (let i = 0; i < neurons.length; i++) {
         for (let j = 0; j < neurons[i].length; j++) {
@@ -54,7 +54,7 @@ const drawBrain = function(data, brain, width, height) {
 
             brain.beginPath()
             brain.arc(center.x, center.y, i == 0 ? 10 : Math.abs(neuron.bias) * 2, 0, 2 * Math.PI, 0, 0)
-            brain.fillStyle = neuron.bias < 0 ? '#f00' : '#00f'
+            brain.fillStyle = neuron.bias < 0 ? '#000' : '#fff'
             brain.fill()
             brain.stroke()
         }

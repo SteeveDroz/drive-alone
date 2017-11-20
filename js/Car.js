@@ -10,6 +10,7 @@ class Car {
         this.countdown = 500
         this.maxFitness = 0
         this.lastCheckpoint = 0
+        this.totalTime = 0
         this.width = 50
         this.height = 30
         this.angle = 0
@@ -29,8 +30,15 @@ class Car {
             if (!b.working) {
                 return a
             }
-            return a.getFitness() > b.getFitness() ? a : b
+            return Car.compare(a, b) > 0 ? a : b
         }, cars[0])
+    }
+
+    static compare(a, b) {
+        if (a.getFitness() == Infinity && b.getFitness() == Infinity) {
+            return -(a.totalTime - b.totalTime)
+        }
+        return a.getFitness() - b.getFitness()
     }
 
     clone() {
@@ -68,6 +76,9 @@ class Car {
                 if (this.getDistanceToRelativeCheckpoint(1) < this.getDistanceToRelativeCheckpoint(0)) {
                     this.lastCheckpoint += 1
                 }
+            }
+            if (this.getFitness() < Infinity) {
+                this.totalTime++
             }
         }
     }
