@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <title>Drive Away</title>
+    <link rel="stylesheet" href="css/style.css" type="text/css">
     <script src="js/Car.js"></script>
     <script src="js/Path.js"></script>
     <script src="js/Point.js"></script>
@@ -31,30 +32,36 @@
 </head>
 
 <body onload="load()">
-    <h1>Drive Alone</h1>
-    <div>
-        <h2>Main window</h2>
-        <p>This window is centered on the current best car.</p>
-        <canvas id="world"></canvas>
-    </div>
-    <div>
-        <h2>Brain</h2>
-        <p>This is an abstract representation of the current best car brain.</p>
-        <canvas id="brain"></canvas>
-    </div>
-    <div>
-        <h2>Minimap</h2>
-        <p>An overview of the whole track</p>
-        <canvas id="minimap"></canvas>
-    </div>
-    <div>
-        <h2>Load and show</h2>
-        <p>Obtain the current brains of the cars using the "show" button.</p>
-        <p>Load a previously saved configuration using the "load" button.</p>
-        <textarea id="brainData" cols="50" rows="10" placeholder="Brain data"></textarea>
-        <button id="loadBrainData">Load</button>
-        <button id="showBrainData">Show</button>
-    </div>
+    <main>
+        <h1>Drive Alone</h1>
+        <div class="tiles">
+            <div class="tile">
+                <h2>Main window</h2>
+                <p>This window is centered on the current best car.</p>
+                <canvas id="world"></canvas>
+            </div>
+            <div class="tile">
+                <h2>Brain</h2>
+                <p>This is an abstract representation of the current best car brain.</p>
+                <canvas id="brain"></canvas>
+            </div>
+            <div class="tile">
+                <h2>Minimap</h2>
+                <p>An overview of the whole track</p>
+                <canvas id="minimap"></canvas>
+            </div>
+            <div class="tile">
+                <h2>Load and show</h2>
+                <p>Obtain the current brains of the cars using the "show" button.</p>
+                <p>Load a previously saved configuration using the "load" button.</p>
+                <textarea id="brainData" cols="50" rows="10" placeholder="Brain data"></textarea>
+                <div class="buttons">
+                    <button id="showBrainData">Show</button>
+                    <button id="loadBrainData">Load</button>
+                </div>
+            </div>
+        </div>
+    </main>
 </body>
 
 </html>

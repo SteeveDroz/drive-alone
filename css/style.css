@@ -1,0 +1,50 @@
+* {
+    box-sizing: border-box;
+}
+
+
+body {
+    background: #eee;
+    margin: 0px;
+    padding: 0px;
+}
+
+main {
+    max-width: 1000px;
+    margin: auto;
+    background: white;
+    padding-top: 20px;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 0;
+}
+
+.tiles {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+
+.tile {
+    border: 1px solid #eee;
+    padding: 5px;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+}
+
+textarea {
+    width: 100%;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.buttons>* {
+    flex-grow: 1;
+}
