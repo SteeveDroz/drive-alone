@@ -53,3 +53,21 @@ p {
     width: 100%;
     text-align: justify;
 }
+
+p.question, p.answer {
+    width: 80%;
+    border: 1px solid;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px rgba(255, 255, 255, 0.5) inset, -5px -5px 5px rgba(0, 0, 0, 0.5) inset;
+}
+
+p.question {
+    margin-right: 20%;
+    background: #ff8;
+}
+
+p.answer {
+    margin-left: 20%;
+    background: #aaf;
+}
