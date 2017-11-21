@@ -41,6 +41,26 @@ class Car {
         return a.getFitness() - b.getFitness()
     }
 
+    load(data) {
+        this.brain = new Brain(...data.layers)
+        for (let layerId = 1; layerId < data.neurons.length; layerId++) {
+            for (let neuronId = 0; neuronId < data.neurons[layerId].length; neuronId++) {
+                const neuronData = data.neurons[layerId][neuronId]
+                const neuron = this.brain.neurons[layerId][neuronId]
+                for (let dataInputId = 0; dataInputId < neuronData.inputs.length; dataInputId++) {
+                    const dataInput = neuronData.inputs[dataInputId]
+                    for (let inputId = 0; inputId < neuron.inputs.length; inputId++) {
+                        const input = neuron.inputs[inputId]
+                        if (input.source.name === dataInput.source.name) {
+                            input.weight = dataInput.weight
+                        }
+                    }
+                }
+                neuron.bias = neuronData.bias
+            }
+        }
+    }
+
     clone() {
         const clone = new Car(this.checkpoints)
         clone.start = this.start

@@ -16,6 +16,7 @@
     <script src="js/drive-alone.js"></script>
     <script src="js/draw-brain.js"></script>
     <script src="js/minimap.js"></script>
+    <script src="js/save.js"></script>
 
     <script>
         const sharedElements = {}
@@ -23,6 +24,7 @@
             loadWorld()
             loadBrain()
             loadMinimap()
+            loadSave()
         }
 
     </script>
@@ -36,6 +38,11 @@
     </div>
     <div>
         <canvas id="minimap"></canvas>
+    </div>
+    <div>
+        <textarea id="brainData" cols="50" rows="10" placeholder="Brain data"></textarea>
+        <button id="loadBrainData">Load</button>
+        <button id="showBrainData">Show</button>
     </div>
 </body>
 

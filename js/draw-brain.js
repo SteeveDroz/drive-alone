@@ -1,4 +1,4 @@
-"use static";
+"use strict";
 
 const loadBrain = function() {
     const canvas = document.getElementById('brain')
