@@ -27,7 +27,7 @@ h1 {
     justify-content: center;
 }
 
-.tile {
+.tiles>* {
     border: 1px solid #eee;
     padding: 5px;
     display: flex;
