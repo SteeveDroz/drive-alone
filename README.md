@@ -1,6 +1,6 @@
 # Drive alone
 
-Once upon a time, I discovered a very nice video (obviously not from me) : [![Alt text for your video](https://img.youtube.com/vi/Aut32pR5PQA/0.jpg)](http://www.youtube.com/watch?v=Aut32pR5PQA)
+Some time ago, I discovered a very nice video (obviously not from me) : [![Alt text for your video](https://img.youtube.com/vi/Aut32pR5PQA/0.jpg)](http://www.youtube.com/watch?v=Aut32pR5PQA)
 
 I decided to retro-engineer that, **without a glimpse at the source code**. Also, I decided to do everything in vanilla Javascript, from scratch. That's right! No plugin, no framework, no Node.js.
 
