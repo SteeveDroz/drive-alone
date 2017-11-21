@@ -33,13 +33,24 @@
 <body onload="load()">
     <h1>Drive Alone</h1>
     <div>
+        <h2>Main window</h2>
+        <p>This window is centered on the current best car.</p>
         <canvas id="world"></canvas>
+    </div>
+    <div>
+        <h2>Brain</h2>
+        <p>This is an abstract representation of the current best car brain.</p>
         <canvas id="brain"></canvas>
     </div>
     <div>
+        <h2>Minimap</h2>
+        <p>An overview of the whole track</p>
         <canvas id="minimap"></canvas>
     </div>
     <div>
+        <h2>Load and show</h2>
+        <p>Obtain the current brains of the cars using the "show" button.</p>
+        <p>Load a previously saved configuration using the "load" button.</p>
         <textarea id="brainData" cols="50" rows="10" placeholder="Brain data"></textarea>
         <button id="loadBrainData">Load</button>
         <button id="showBrainData">Show</button>
