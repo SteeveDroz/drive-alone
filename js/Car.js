@@ -14,12 +14,13 @@ class Car {
         this.width = 50
         this.height = 30
         this.angle = 0
-        this.speed = Math.random() * 0.2 + 0.9
         this.steer = Math.random() * 0.05 - 0.025
+        this.speed = 0
+        this.acceleration = Math.random() * 0.2 + 0.9
         this.totalDistance = 0
         this.color = '#440'
         this.working = true
-        this.brain = new Brain(5, 4, 3, 2)
+        this.brain = new Brain(6, 5, 4, 3, 2)
     }
 
     static findBest(cars) {
@@ -78,10 +79,10 @@ class Car {
     move() {
         if (this.working) {
             this.angle += this.steer
+            this.speed += this.acceleration
             this.location.x += Math.cos(this.angle) * this.speed
             this.location.y += Math.sin(this.angle) * this.speed
             this.totalDistance += this.speed
-            this.maxDistanceFromStart = Math.max(this.maxDistanceFromStart, this.location.getDistance(this.start))
 
             if (this.getFitness() < this.maxFitness + 100) {
                 if (--this.countdown < 0) {
@@ -214,9 +215,9 @@ class Car {
                 this.beamLeft.getLength(),
                 this.beamCenter.getLength(),
                 this.beamRight.getLength(),
-                this.beamFarRight.getLength())
+                this.beamFarRight.getLength(), this.speed)
 
-        this.speed = Util.map(data[0], [0, 1], [-2, 3])
+        this.acceleration = Util.map(data[0], [0, 1], [-0.05, 0.05])
         this.steer = Util.map(data[1], [0, 1], [-0.05, 0.05])
     }
 

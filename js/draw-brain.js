@@ -2,8 +2,8 @@
 
 const loadBrain = function() {
     const canvas = document.getElementById('brain')
-    canvas.width = 300
-    canvas.height = 300
+    canvas.width = 360
+    canvas.height = 375
     const brain = canvas.getContext('2d')
 
     const data = {}
