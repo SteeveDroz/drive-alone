@@ -120,6 +120,15 @@ class Car {
         this.drawBeam(context, this.beamFarRight)
         this.drawBeam(context, this.beamLeft)
         this.drawBeam(context, this.beamFarLeft)
+
+        if (this.keptFromLastGeneration) {
+            context.save()
+            context.translate(this.location.x, this.location.y)
+            context.rotate(this.angle)
+            context.fillStyle = '#000'
+            context.fillRect(-2, -2, 4, 4)
+            context.restore()
+        }
     }
 
     drawBeam(context, beam) {

@@ -15,12 +15,14 @@ const loadBrainData = function() {
     const brainData = document.getElementById('brainData')
     try {
         const brainValue = JSON.parse(brainData.value)
+        const cars = []
         for (let i = 0; i < brainValue.length; i++) {
-            const car = sharedElements.cars[i]
+            const car = sharedElements.cars[i].clone()
             car.load(brainValue[i])
+            cars.push(car)
         }
+        sharedElements.nextGeneration = cars
     } catch (e) {
-        console.log(e);
         brainData.style.transition = '0.2s'
         brainData.style.background = 'red'
         brainData.style.color = 'white'

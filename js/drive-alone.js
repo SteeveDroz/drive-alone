@@ -101,15 +101,23 @@ const loadWorld = function() {
 
 const updateWorld = function(data) {
     if (--data.countdown < 0) {
-        const rankedCars = data.cars.sort(Car.compare).reverse()
-        data.cars = []
-        for (let i = 0; i < 3; i++) {
-            data.cars = data.cars.concat(rankedCars[i].createNextGeneration(3 - i))
-            data.cars.push(rankedCars[i].clone())
-        }
-        data.cars.push(new Car(data.checkpoints))
+        if (sharedElements.nextGeneration !== undefined) {
+            data.cars = sharedElements.nextGeneration
+            sharedElements.nextGeneration = undefined
+            data.generation = 0
+        } else {
+            const rankedCars = data.cars.sort(Car.compare).reverse()
+            data.cars = []
+            for (let i = 0; i < 3; i++) {
+                data.cars = data.cars.concat(rankedCars[i].createNextGeneration(3 - i))
+                const keptCar = rankedCars[i].clone()
+                keptCar.keptFromLastGeneration = true
+                data.cars.push(keptCar)
+            }
+            data.cars.push(new Car(data.checkpoints))
 
-        data.generation += 1
+            data.generation += 1
+        }
         data.countdown = data.initialCountdown
     }
 
