@@ -1,9 +1,15 @@
 "use strict";
 
+const brainLayersSpacing = 75
+const brainNeuronsSpacing = 60
+const brainMargin = 25
+const brainLayers = 5
+const brainNeurons = 6
+
 const loadBrain = function() {
     const canvas = document.getElementById('brain')
-    canvas.width = 360
-    canvas.height = 375
+    canvas.width = (brainLayers - 1) * brainLayersSpacing + 2 * brainMargin
+    canvas.height = (brainNeurons - 1) * brainNeuronsSpacing + 2 * brainMargin
     const brain = canvas.getContext('2d')
 
     const data = {}
@@ -62,5 +68,5 @@ const drawBrain = function(data, brain, width, height) {
 }
 
 const getCenter = function(layer, neuron) {
-    return new Point(75 * layer + 25, 60 * (neuron + layer / 2) + 25)
+    return new Point(brainLayersSpacing * layer + brainMargin, brainNeuronsSpacing * (neuron + layer / 2) + brainMargin)
 }
