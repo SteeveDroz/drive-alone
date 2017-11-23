@@ -80,6 +80,7 @@ class Car {
         if (this.working) {
             this.angle += this.steer
             this.speed += this.acceleration
+            this.speed = Math.min(Math.max(-2, this.speed), 3)
             this.location.x += Math.cos(this.angle) * this.speed
             this.location.y += Math.sin(this.angle) * this.speed
             this.totalDistance += this.speed
